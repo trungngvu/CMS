@@ -1,8 +1,25 @@
 import SidebarItems from "./items";
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
+
+import { HomeIcon } from "@heroicons/react/24/solid"; 
+import { NewspaperIcon } from "@heroicons/react/24/solid"; 
+import { ArrowPathIcon } from "@heroicons/react/24/solid"; 
 const WriteSidebar = () => {
-  const [pages, setPages] = useState(["Trang chủ", "Tin tức", "Cập nhật"]);
+  const [pages, setPages] = useState([
+    {
+      name: "Trang chủ",
+      Icon: HomeIcon
+    },
+    {
+      name: "Tin tức",
+      Icon: NewspaperIcon
+    },
+    {
+      name: "Cập nhật",
+      Icon: ArrowPathIcon
+    }
+  ]);
 
   return (
     <>
