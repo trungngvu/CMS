@@ -7,7 +7,7 @@ const SidebarItems = ({items}: props) => {
     return (
         <>
         {items.map((item,index)=>{
-            return (<SidebarItem name={item}/>)
+            return (<SidebarItem name={item} key={index}/>)
         })}
         </>
     )

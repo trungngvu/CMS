@@ -2,16 +2,13 @@ interface props {
   data: {
     id: number;
     title: string;
-    createdAt: string;
+    createAt: string;
     updateAt: string;
     state: string;
   }[];
-};
+}
 
 const Table = ({ data }: props) => {
-  const listTable =() => {
-    
-  }
   return (
     <table>
       <thead>
@@ -24,6 +21,15 @@ const Table = ({ data }: props) => {
         </tr>
       </thead>
       <tbody>
+        {data.map((row) => (
+          <tr key={row.id} className="cursor-pointer hover:bg-slate-100">
+            <td>{row.id}</td>
+            <td>{row.title}</td>
+            <td>{row.createAt}</td>
+            <td>{row.updateAt}</td>
+            <td>{row.state}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );

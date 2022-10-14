@@ -11,8 +11,8 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Sidebar />}>
         <Route index element={<Dashboard />} />
-        <Route path="/write" element={<WriteSidebar />}>
-          <Route path="/write/bai1" element={<ContentManager />} />
+        <Route path="write" element={<WriteSidebar />}>
+          <Route path=":categoryId" element={<ContentManager />} />
         </Route>
       </Route>
     </Routes>

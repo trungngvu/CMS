@@ -1,6 +1,6 @@
 import SidebarItems from "./items";
 import { useState } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 const WriteSidebar = () => {
   const [pages, setPages] = useState(["Trang chủ", "Tin tức", "Cập nhật"]);
 
@@ -10,9 +10,7 @@ const WriteSidebar = () => {
         <div className="h-12 text-center">Page</div>
         <hr className="text-gray-100 w-8 ml-3" />
         <ul>
-          <Link to={"/write/bai1"}>
             <SidebarItems items={pages} />
-          </Link>
         </ul>
       </nav>
       <Outlet />
