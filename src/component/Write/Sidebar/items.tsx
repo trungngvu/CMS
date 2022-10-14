@@ -1,13 +1,21 @@
 import SidebarItem from './item'
 
+interface vectorprops {
+    className?: string;
+  }
+
 interface props {
-    items: string[],
+    items: {
+        name: string,
+        Icon: React.FC<vectorprops>;
+    }[],
+
 }
 const SidebarItems = ({items}: props) => {
     return (
         <>
         {items.map((item,index)=>{
-            return (<SidebarItem name={item}/>)
+            return (<SidebarItem name={item.name} Icon={item.Icon}/>)
         })}
         </>
     )

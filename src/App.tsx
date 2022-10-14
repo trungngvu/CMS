@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Sidebar from "./component/Sidebar";
 import Dashboard from "./Pages/Dashboard";
 import WriteSidebar from "./component/Write/Sidebar";
-import Article from "./component/Write/article";
+import Article from "./component/Write/Article";
 import ContentManager from "./component/ContentManager";
 
 const App = () => {
