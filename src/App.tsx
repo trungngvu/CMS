@@ -12,7 +12,7 @@ const App = () => {
       <Route path="/" element={<Sidebar />}>
         <Route index element={<Dashboard />} />
         <Route path="write" element={<WriteSidebar />}>
-          <Route path=":categoryId" element={<ContentManager />} />
+          <Route path=":category" element={<ContentManager />} />
         </Route>
       </Route>
     </Routes>

@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import Table from "./table";
 
 const ContentManager = () => {
+  const params = useParams();
+  const category = params.category;
   const [tableData, setTableDate] = useState([
     {
       id: 1,
@@ -20,15 +22,12 @@ const ContentManager = () => {
     },
   ]);
 
-  const categoryId = useParams();
-  console.log(categoryId);
-
   return (
     <div className="ml-80 px-10 py-6">
       <div className="container ">
         <div className="pb-6">Back</div>
         <div className="flex justify-between">
-          <div className="font-bold text-lg ">Tintuc</div>
+          <div className="font-bold text-lg ">{category}</div>
           <button className="bg-blue-700 text-white pl-8 pr-4 py-2 rounded-md text-sm relative">
             <span className="pr-4 text-xl font-bold absolute -translate-x-5 -translate-y-1 ">
               +
@@ -38,7 +37,7 @@ const ContentManager = () => {
         </div>
         <div className="">2 entries found</div>
       </div>
-      <div className="py-4">Search Filter</div>
+      <div className="py-4">Search Filter </div>
       <Table data={tableData} />
     </div>
   );
