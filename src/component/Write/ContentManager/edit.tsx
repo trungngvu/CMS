@@ -58,7 +58,7 @@ const Edit = () => {
               onClick={handleSave}
               className="bg-blue-700 text-white px-4 rounded-md text-sm relative"
             >
-              Save
+              Update
             </button>
           </div>
         </div>
