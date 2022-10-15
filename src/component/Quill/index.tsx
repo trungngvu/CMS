@@ -3,7 +3,12 @@ import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 // import { ImageResize } from "quill-image-resize-module--fix-imports-error";
 
-export default function Editor() {
+interface props {
+  setEditorValue: (value: string) => void;
+  editorValue: string;
+}
+
+export default function Editor({ editorValue, setEditorValue }: props) {
   // Quill.register("modules/imageResize", ImageResize);
   const modules = {
     toolbar: [
@@ -23,14 +28,12 @@ export default function Editor() {
     // imageResize: { modules: ["Resize", "DisplaySize"] },
   };
 
-  const [value, setValue] = useState("");
-  console.log(value);
   return (
     <ReactQuill
       modules={modules}
       theme="snow"
-      value={value}
-      onChange={setValue}
+      value={editorValue}
+      onChange={(e)=>setEditorValue(e)}
     />
   );
 }
