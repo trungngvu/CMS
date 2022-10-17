@@ -55,6 +55,7 @@ const EditArticle = () => {
               >
                 Delete
               </button>
+              
               <input
                 type="submit"
                 value="Save"
@@ -64,6 +65,7 @@ const EditArticle = () => {
           </div>
           <div>Collection name: Article</div>
         </div>
+
         <div>
           Title<span className="text-red-600">*</span>
         </div>
@@ -72,6 +74,7 @@ const EditArticle = () => {
           className="border rounded"
           type={"text"}
         ></input>
+
         <div>
           Description<span className="text-red-600">*</span>
         </div>
@@ -83,6 +86,7 @@ const EditArticle = () => {
         <div className="py-10">
           <Editor setEditorValue={setEditorValue} editorValue={editorValue} />
         </div>
+
         <div>
           Slug<span className="text-red-600">*</span>
         </div>
@@ -94,6 +98,7 @@ const EditArticle = () => {
           className="border rounded"
           type={"text"}
         ></input>
+
       </div>
     </form>
   );

@@ -42,7 +42,7 @@ const EditCategory = () => {
       <div className="ml-80 px-10 py-6">
         <div className="py-12">
           <div className="flex justify-between">
-            <h1 className="text-3xl p-">{title}</h1>
+            <h1 className="text-3xl">{title}</h1>
             <div className="flex gap-3">
               <button
                 onClick={handleDelete}
@@ -67,7 +67,7 @@ const EditCategory = () => {
           className="border rounded"
           type={"text"}
         ></input>
-        
+
         <div>
           Slug<span className="text-red-600">*</span>
         </div>

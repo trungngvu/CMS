@@ -20,7 +20,7 @@ const CreateAuthor = () => {
       <div className="ml-80 px-10 py-6">
         <div className="py-12">
           <div className="flex justify-between">
-            <h1 className="text-3xl p-">Create an entry</h1>
+            <h1 className="text-3xl ">Create an entry</h1>
             <input
               type="submit"
               value="Save"
