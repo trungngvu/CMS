@@ -1,12 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
+import toastProps from "../../../Common/toastProps";
 import instance from "../../../Common/axios";
 
-const EditCategory = () => {
+const EditCategory = ({ successToast, errorToast }: toastProps) => {
   const { register, handleSubmit, setValue } = useForm();
   const [title, setTitle] = useState("");
+  const navigate = useNavigate();
 
   const id = useParams().id;
 
@@ -18,7 +20,7 @@ const EditCategory = () => {
         setValue("name", res.data.name);
         setValue("slug", res.data.slug);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => errorToast(err.code));
   }, []);
 
   const handleSave = (data: any) => {
@@ -26,23 +28,34 @@ const EditCategory = () => {
       .put(`/category/${id}`, {
         ...data,
       })
-      .then(() => console.log("PUT success"))
-      .catch((err) => console.log(err));
+      .then(() => {
+        successToast("Update successfully!");
+        navigate(-1);
+      })
+      .catch((err) => errorToast(err.code));
   };
 
   const handleDelete = () => {
     instance
       .delete(`/category/${id}`)
-      .then(() => console.log("Delete Success"))
-      .catch((err) => console.log(err));
+      .then(() => {
+        successToast("Delete successfully!");
+        navigate(-1);
+      })
+      .catch((err) => errorToast(err.code));
   };
 
   return (
-    <form onSubmit={handleSubmit(handleSave)}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit(handleSave);
+      }}
+    >
       <div className="ml-80 px-10 py-6">
         <div className="py-12">
           <div className="flex justify-between">
-            <h1 className="text-3xl p-">{title}</h1>
+            <h1 className="text-3xl">{title}</h1>
             <div className="flex gap-3">
               <button
                 onClick={handleDelete}
@@ -52,7 +65,7 @@ const EditCategory = () => {
               </button>
               <input
                 type="submit"
-                value="Save"
+                value="Update"
                 className="bg-blue-700 text-white px-4 rounded-md text-sm relative cursor-pointer"
               />
             </div>
@@ -67,7 +80,7 @@ const EditCategory = () => {
           className="border rounded"
           type={"text"}
         ></input>
-        
+
         <div>
           Slug<span className="text-red-600">*</span>
         </div>

@@ -1,14 +1,16 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
+import toastProps from "../../../Common/toastProps";
 import Editor from "../../Quill";
 import instance from "../../../Common/axios";
 
-const EditArticle = () => {
+const EditArticle = ({ successToast, errorToast }: toastProps) => {
   const { register, handleSubmit, setValue } = useForm();
   const [editorValue, setEditorValue] = useState("");
   const [title, setTitle] = useState("");
+  const navigate = useNavigate();
 
   const id = useParams().id;
 
@@ -22,7 +24,7 @@ const EditArticle = () => {
         setValue("slug", res.data.slug);
         setEditorValue(res.data.content);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => errorToast(err.code));
   }, []);
 
   const handleSave = (data: any) => {
@@ -31,19 +33,30 @@ const EditArticle = () => {
         ...data,
         content: editorValue,
       })
-      .then(() => console.log("PUT success"))
-      .catch((err) => console.log(err));
+      .then(() => {
+        successToast("Update successfully!");
+        navigate(-1);
+      })
+      .catch((err) => errorToast(err.code));
   };
 
   const handleDelete = () => {
     instance
       .delete(`/article/${id}`)
-      .then(() => console.log("Delete Success"))
-      .catch((err) => console.log(err));
+      .then(() => {
+        successToast("Delete successfully!");
+        navigate(-1);
+      })
+      .catch((err) => errorToast(err.code));
   };
 
   return (
-    <form onSubmit={handleSubmit(handleSave)}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit(handleSave);
+      }}
+    >
       <div className="ml-80 px-10 py-6">
         <div className="py-12">
           <div className="flex justify-between">
@@ -55,15 +68,17 @@ const EditArticle = () => {
               >
                 Delete
               </button>
+
               <input
                 type="submit"
-                value="Save"
+                value="Update"
                 className="bg-blue-700 text-white px-4 rounded-md text-sm relative cursor-pointer"
               />
             </div>
           </div>
           <div>Collection name: Article</div>
         </div>
+
         <div>
           Title<span className="text-red-600">*</span>
         </div>
@@ -72,6 +87,7 @@ const EditArticle = () => {
           className="border rounded"
           type={"text"}
         ></input>
+
         <div>
           Description<span className="text-red-600">*</span>
         </div>
@@ -83,6 +99,7 @@ const EditArticle = () => {
         <div className="py-10">
           <Editor setEditorValue={setEditorValue} editorValue={editorValue} />
         </div>
+
         <div>
           Slug<span className="text-red-600">*</span>
         </div>

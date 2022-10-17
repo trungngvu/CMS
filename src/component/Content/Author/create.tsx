@@ -1,18 +1,23 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import toastProps from "../../../Common/toastProps";
 
 import instance from "../../../Common/axios";
 
-const CreateAuthor = () => {
+const CreateAuthor = ({ errorToast, successToast }: toastProps) => {
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
   const handleSave = (data: any) => {
     instance
       .post(`/author`, {
         ...data,
       })
-      .then((res) => console.log("POST Success"))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        successToast("Create sucessfully");
+        navigate(-1);
+      })
+      .catch((err) => errorToast(err.code));
   };
 
   return (
@@ -20,7 +25,7 @@ const CreateAuthor = () => {
       <div className="ml-80 px-10 py-6">
         <div className="py-12">
           <div className="flex justify-between">
-            <h1 className="text-3xl p-">Create an entry</h1>
+            <h1 className="text-3xl ">Create an entry</h1>
             <input
               type="submit"
               value="Save"

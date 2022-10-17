@@ -3,13 +3,14 @@ import { useLocation, Link } from "react-router-dom";
 
 import Table from "./table";
 import instance from "../../../Common/axios";
+import toastProps from "../../../Common/toastProps";
 
-const ContentManager = () => {
+const ContentManager = ({ errorToast }: toastProps) => {
   const [tableData, setTableData] = useState([]);
   //get last path of the URL
   const location = useLocation();
   const api = location.pathname.slice(
-    location.pathname.lastIndexOf("/")+1,
+    location.pathname.lastIndexOf("/") + 1,
     location.pathname.length
   );
 
@@ -17,7 +18,7 @@ const ContentManager = () => {
     instance
       .get(`/${api}`)
       .then((res) => setTableData(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => errorToast(err.code));
   }, [api]);
 
   return (
@@ -36,9 +37,8 @@ const ContentManager = () => {
             Create new entry
           </Link>
         </div>
-        {tableData.length !== 0 && (
-          <div className="">{tableData.length} entries found</div>
-        )}
+
+        <div className="">{tableData.length || 0} entries found</div>
       </div>
       <div className="py-4">Search Filter </div>
       {tableData.length !== 0 && <Table data={tableData} />}
