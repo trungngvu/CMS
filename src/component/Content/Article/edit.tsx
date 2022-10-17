@@ -7,7 +7,13 @@ import Editor from "../../Quill";
 import instance from "../../../Common/axios";
 
 const EditArticle = ({ successToast, errorToast }: toastProps) => {
-  const { register, handleSubmit, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    formState,
+  } = useForm();
   const [editorValue, setEditorValue] = useState("");
   const [title, setTitle] = useState("");
   const navigate = useNavigate();
@@ -87,6 +93,9 @@ const EditArticle = ({ successToast, errorToast }: toastProps) => {
           className="border rounded"
           type={"text"}
         ></input>
+        {errors.title?.type === "required" && (
+          <p role="alert">Title is required</p>
+        )}
 
         <div>
           Description<span className="text-red-600">*</span>
@@ -96,7 +105,12 @@ const EditArticle = ({ successToast, errorToast }: toastProps) => {
           className="border rounded"
           type={"text"}
         ></input>
+        {errors.description?.type === "required" && (
+          <p role="alert">Description is required</p>
+        )}
+
         <div className="py-10">
+          <div>Content</div>
           <Editor setEditorValue={setEditorValue} editorValue={editorValue} />
         </div>
 
@@ -105,12 +119,20 @@ const EditArticle = ({ successToast, errorToast }: toastProps) => {
         </div>
         <input
           {...register("slug", {
-            required: true,
-            pattern: /^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/,
+            required: "Slug is required",
+            pattern: {
+              value: /^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/,
+              message: "Invalid Slug",
+            },
           })}
           className="border rounded"
           type={"text"}
         ></input>
+        {formState.errors.slug?.message && (
+          <p>
+            <>{formState.errors.slug?.message}</>
+          </p>
+        )}
       </div>
     </form>
   );

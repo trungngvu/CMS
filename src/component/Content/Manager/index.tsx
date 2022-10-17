@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 
 import Table from "./table";
 import instance from "../../../Common/axios";
@@ -7,6 +7,7 @@ import toastProps from "../../../Common/toastProps";
 
 const ContentManager = ({ errorToast }: toastProps) => {
   const [tableData, setTableData] = useState([]);
+  const navigate = useNavigate();
   //get last path of the URL
   const location = useLocation();
   const api = location.pathname.slice(
@@ -24,7 +25,9 @@ const ContentManager = ({ errorToast }: toastProps) => {
   return (
     <div className="ml-80 px-10 py-6">
       <div className="container ">
-        <div className="pb-6">Back</div>
+        <div className="pb-6 cursor-pointer" onClick={() => navigate(-1)}>
+          Back
+        </div>
         <div className="flex justify-between">
           <div className="font-bold text-lg capitalize">{api}</div>
           <Link

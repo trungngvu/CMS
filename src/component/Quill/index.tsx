@@ -33,7 +33,7 @@ export default function Editor({ editorValue, setEditorValue }: props) {
       modules={modules}
       theme="snow"
       value={editorValue}
-      onChange={(e)=>setEditorValue(e)}
+      onChange={(e) => setEditorValue(e)}
     />
   );
 }

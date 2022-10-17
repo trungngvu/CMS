@@ -71,6 +71,7 @@ const CreateArticle = ({ errorToast, successToast }: toastProps) => {
         )}
 
         <div className="py-10">
+        <div>Content</div>
           <Editor setEditorValue={setEditorValue} editorValue={editorValue} />
         </div>
 
