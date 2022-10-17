@@ -1,19 +1,23 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import toastProps from "../../../Common/toastProps";
 
-import Editor from "../../Quill";
 import instance from "../../../Common/axios";
 
-const CreateCategory = () => {
+const CreateCategory = ({ errorToast, successToast }: toastProps) => {
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
-  const handleSave = (data:any) => {
+  const handleSave = (data: any) => {
     instance
       .post(`/category`, {
         ...data,
       })
-      .then((res) => console.log("POST Success"))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        successToast("Create sucessfully");
+        navigate(-1);
+      })
+      .catch((err) => errorToast(err.code));
   };
 
   return (

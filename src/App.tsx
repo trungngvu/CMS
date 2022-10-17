@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 import Sidebar from "./component/Sidebar";
 import Dashboard from "./Pages/Dashboard";
@@ -12,29 +14,68 @@ import EditAuthor from "./component/Content/Author/edit";
 import ContentManager from "./component/Content/Manager";
 
 const App = () => {
+  const successToast = (mes: string) =>
+    toast.success(mes, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+      theme: "colored",
+    });
+
+  const errorToast = (mes: string) =>
+    toast.error(mes, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+      theme: "colored",
+    });
+
   return (
-    <Routes>
-      <Route path="/" element={<Sidebar />}>
-        <Route index element={<Dashboard />} />
-        <Route path="write" element={<WriteSidebar />}>
-          <Route path="article">
-            <Route index element={<ContentManager />} />
-            <Route path="create" element={<CreateArticle />} />
-            <Route path=":id" element={<EditArticle />} />
-          </Route>
-          <Route path="category">
-            <Route index element={<ContentManager />} />
-            <Route path="create" element={<CreateCategory />} />
-            <Route path=":id" element={<EditCategory />} />
-          </Route>
-          <Route path="author">
-            <Route index element={<ContentManager />} />
-            <Route path="create" element={<CreateAuthor />} />
-            <Route path=":id" element={<EditAuthor />} />
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover
+        theme="colored"
+      />
+
+      <Routes>
+        <Route path="/" element={<Sidebar />}>
+          <Route index element={<Dashboard />} />
+          <Route path="write" element={<WriteSidebar />}>
+            <Route path="article">
+              <Route index element={<ContentManager errorToast={errorToast} successToast={successToast}/>} />
+              <Route path="create" element={<CreateArticle errorToast={errorToast} successToast={successToast}/>} />
+              <Route path=":id" element={<EditArticle errorToast={errorToast} successToast={successToast}/>} />
+            </Route>
+            <Route path="category">
+              <Route index element={<ContentManager errorToast={errorToast} successToast={successToast}/>} />
+              <Route path="create" element={<CreateCategory errorToast={errorToast} successToast={successToast}/>} />
+              <Route path=":id" element={<EditCategory errorToast={errorToast} successToast={successToast}/>} />
+            </Route>
+            <Route path="author">
+              <Route index element={<ContentManager errorToast={errorToast} successToast={successToast}/>} />
+              <Route path="create" element={<CreateAuthor errorToast={errorToast} successToast={successToast}/>} />
+              <Route path=":id" element={<EditAuthor errorToast={errorToast} successToast={successToast}/>} />
+            </Route>
           </Route>
         </Route>
-      </Route>
-    </Routes>
+      </Routes>
+    </>
   );
 };
 

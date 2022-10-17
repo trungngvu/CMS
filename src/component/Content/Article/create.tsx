@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import Editor from "../../Quill";
 import instance from "../../../Common/axios";
 import ArticleRelation from "./relation";
+import toastProps from "../../../Common/toastProps";
 
-const CreateArticle = () => {
+const CreateArticle = ({ errorToast, successToast }: toastProps) => {
   const {
     register,
     handleSubmit,
@@ -13,6 +15,7 @@ const CreateArticle = () => {
     formState,
   } = useForm();
   const [editorValue, setEditorValue] = useState("");
+  const navigate = useNavigate();
 
   const handleSave = (data: any) => {
     instance
@@ -20,8 +23,11 @@ const CreateArticle = () => {
         ...data,
         content: editorValue,
       })
-      .then((res) => console.log("POST Success"))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        successToast("Create sucessfully");
+        navigate(-1);
+      })
+      .catch((err) => errorToast(err.code));
   };
 
   return (
@@ -74,13 +80,19 @@ const CreateArticle = () => {
         <input
           {...register("slug", {
             required: "Slug is required",
-            pattern: {value: /^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/, message:"Invalid Slug"},
+            pattern: {
+              value: /^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/,
+              message: "Invalid Slug",
+            },
           })}
           className="border rounded"
           type={"text"}
         ></input>
-        {formState.errors.slug?.message &&  <p><>{formState.errors.slug?.message}</></p> }
-
+        {formState.errors.slug?.message && (
+          <p>
+            <>{formState.errors.slug?.message}</>
+          </p>
+        )}
       </div>
     </form>
   );
