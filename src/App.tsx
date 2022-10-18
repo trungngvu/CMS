@@ -5,12 +5,9 @@ import "react-toastify/dist/ReactToastify.min.css";
 import Sidebar from "./component/Sidebar";
 import Dashboard from "./Pages/Dashboard";
 import WriteSidebar from "./component/Content/Sidebar";
-import CreateArticle from "./component/Content/Article/create";
-import EditArticle from "./component/Content/Article/edit";
-import CreateCategory from "./component/Content/Category/create";
-import EditCategory from "./component/Content/Category/edit";
-import CreateAuthor from "./component/Content/Author/create";
-import EditAuthor from "./component/Content/Author/edit";
+import EditArticle from "./component/Content/Article";
+import EditCategory from "./component/Content/Category";
+import EditAuthor from "./component/Content/Author";
 import ContentManager from "./component/Content/Manager";
 
 const App = () => {
@@ -59,17 +56,17 @@ const App = () => {
           <Route path="write" element={<WriteSidebar />}>
             <Route path="article">
               <Route index element={<ContentManager errorToast={errorToast} successToast={successToast}/>} />
-              <Route path="create" element={<CreateArticle errorToast={errorToast} successToast={successToast}/>} />
+              <Route path="create" element={<EditArticle errorToast={errorToast} successToast={successToast}/>} />
               <Route path=":id" element={<EditArticle errorToast={errorToast} successToast={successToast}/>} />
             </Route>
             <Route path="category">
               <Route index element={<ContentManager errorToast={errorToast} successToast={successToast}/>} />
-              <Route path="create" element={<CreateCategory errorToast={errorToast} successToast={successToast}/>} />
+              <Route path="create" element={<EditCategory errorToast={errorToast} successToast={successToast}/>} />
               <Route path=":id" element={<EditCategory errorToast={errorToast} successToast={successToast}/>} />
             </Route>
             <Route path="author">
               <Route index element={<ContentManager errorToast={errorToast} successToast={successToast}/>} />
-              <Route path="create" element={<CreateAuthor errorToast={errorToast} successToast={successToast}/>} />
+              <Route path="create" element={<EditAuthor errorToast={errorToast} successToast={successToast}/>} />
               <Route path=":id" element={<EditAuthor errorToast={errorToast} successToast={successToast}/>} />
             </Route>
           </Route>

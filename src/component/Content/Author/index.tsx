@@ -8,54 +8,70 @@ import instance from "../../../Common/axios";
 const EditAuthor = ({ successToast, errorToast }: toastProps) => {
   const { register, handleSubmit, setValue } = useForm();
   const [title, setTitle] = useState("");
+  const [propagation, stopPropagation] = useState(false);
   const navigate = useNavigate();
 
-  const id = useParams().id;
+  const id = useParams().id || "";
 
   useEffect(() => {
-    instance
-      .get(`/author/${id}`)
-      .then((res) => {
-        setTitle(res.data.name);
-        setValue("name", res.data.name);
-        setValue("email", res.data.email);
-      })
-      .catch((err) => errorToast(err.code));
+    id != "" &&
+      instance
+        .get(`/author/${id}`)
+        .then((res) => {
+          setTitle(res.data.name);
+          setValue("name", res.data.name);
+          setValue("email", res.data.email);
+        })
+        .catch((err) => errorToast(err.code));
   }, []);
 
   const handleSave = (data: any) => {
-    instance
-      .put(`/author/${id}`, {
-        ...data,
-      })
-      .then(() => {
-        successToast("Update successfully!");
-        navigate(-1);
-      })
-      .catch((err) => errorToast(err.code));
+    if (propagation == false)
+      if (id != "") {
+        instance
+          .put(`/author/${id}`, {
+            ...data,
+          })
+          .then(() => {
+            successToast("Update successfully!");
+            navigate(-1);
+          })
+          .catch((err) => errorToast(err.code));
+      } else {
+        instance
+          .post(`/author`, {
+            ...data,
+          })
+          .then((res) => {
+            successToast("Create sucessfully");
+            navigate(-1);
+          })
+          .catch((err) => errorToast(err.code));
+      }
   };
 
   const handleDelete = () => {
-    instance
-      .delete(`/author/${id}`)
-      .then(() => {
-        successToast("Delete successfully!");
-        navigate(-1);
-      })
-      .catch((err) => errorToast(err.code));
+    stopPropagation(true);
+    if (id != "")
+      instance
+        .delete(`/author/${id}`)
+        .then(() => {
+          successToast("Delete successfully!");
+          navigate(-1);
+        })
+        .catch((err) => errorToast(err.code));
+    else {
+      successToast("Delete successfully!");
+      navigate(-1);
+    }
   };
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmit(handleSave);
-      }}
-    >
+    <form onSubmit={handleSubmit(handleSave)}>
       <div className="ml-80 px-10 py-6">
         <div className="py-12">
           <div className="flex justify-between">
-            <h1 className="text-3xl p-">{title}</h1>
+            <h1 className="text-3xl p-">{title || "Create an entry"}</h1>
             <div className="flex gap-3">
               <button
                 onClick={handleDelete}
@@ -65,7 +81,7 @@ const EditAuthor = ({ successToast, errorToast }: toastProps) => {
               </button>
               <input
                 type="submit"
-                value="update"
+                value="Save"
                 className="bg-blue-700 text-white px-4 rounded-md text-sm relative cursor-pointer"
               />
             </div>
