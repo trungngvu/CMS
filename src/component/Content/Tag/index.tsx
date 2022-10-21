@@ -104,7 +104,7 @@ const EditTag = () => {
         ></input>
         {errors.name?.type === "required" && (
           <p role="alert">Name is required</p>
-        )}
+        )}   
       </div>
     </form>
   );
