@@ -7,6 +7,7 @@ import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
 import Editor from "../../Quill";
 import instance from "../../../Common/axios";
 import ArticleRelation from "./relation";
+import { DEFAULT_MAX_VERSION } from "tls";
 
 const EditArticle = () => {
   const {
@@ -158,63 +159,75 @@ const EditArticle = () => {
           <div className="text-blue-600 font-medium">Article</div>
         </div>
 
-        <div className="grid grid-rows-2">
-          <div>
-            <div className="mb-2 cursor-pointer text-blue-800 font-medium hover:underline w-fix">
-              Title<span className="text-red-600"> *</span>
+        <div className="grid grid-cols-2">
+          <div className="grid grid-rows-2">
+            <div>
+              <div className="my-2 cursor-pointer text-blue-800 font-medium w-fix">
+                Title<span className="text-red-600"> *</span>
+              </div>
+              <input
+                {...register("title", { required: true })}
+                className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-3/5 h-7"
+                type={"text"}
+              ></input>
+              {errors.title?.type === "required" && (
+                <p role="alert" className="text-red-600 italic text-sm mt-1">
+                  <ExclamationTriangleIcon className="w-4 inline" /> Title is
+                  required
+                </p>
+              )}
+            </div>
+
+            <div>
+              <div className="my-2 cursor-pointer text-blue-800 font-medium w-fix">
+                Description<span className="text-red-600"> *</span>
+              </div>
+              <input
+                {...register("description", { required: true })}
+                className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-3/5 h-7"
+                type={"text"}
+              ></input>
+              {errors.description?.type === "required" && (
+                <p role="alert" className="text-red-600 italic text-sm mt-1">
+                  <ExclamationTriangleIcon className="w-4 inline" /> Description
+                  is required
+                </p>
+              )}
+            </div>
+
+            <div className="my-2 cursor-pointer text-blue-800 font-medium w-fix">
+              Slug<span className="text-red-600"> *</span>
             </div>
             <input
-              {...register("title", { required: true })}
-              className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-2/5 h-7"
+              {...register("slug", {
+                required: "Slug is required",
+                pattern: {
+                  value: /^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/,
+                  message: "Invalid Slug",
+                },
+              })}
+              className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-3/5 h-7"
               type={"text"}
             ></input>
-            {errors.title?.type === "required" && (
-              <p role="alert" className="text-red-600 italic text-sm mt-1">
-                <ExclamationTriangleIcon className="w-4 inline" /> Title is
-                required
+            {formState.errors.slug?.message && (
+              <p className="text-red-600 italic	text-sm mt-1">
+                <>
+                  <ExclamationTriangleIcon className="w-4 inline" />
+                  {formState.errors.slug?.message}
+                </>
               </p>
             )}
           </div>
 
           <div>
-            <div className="mb-2 cursor-pointer text-blue-800 font-medium hover:underline w-fix">
-              Description<span className="text-red-600"> *</span>
-            </div>
-            <input
-              {...register("description", { required: true })}
-              className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-2/5 h-7"
-              type={"text"}
-            ></input>
-            {errors.description?.type === "required" && (
-              <p role="alert" className="text-red-600 italic text-sm mt-1">
-                <ExclamationTriangleIcon className="w-4 inline" /> Description
-                is required
-              </p>
-            )}
+            <ArticleRelation
+              category={category}
+              author={author}
+              tag={tag}
+              relation={relation}
+              setRelation={setRelation}
+            ></ArticleRelation>
           </div>
-
-          <div className="mb-2 cursor-pointer text-blue-800 font-medium hover:underline w-fix">
-            Slug<span className="text-red-600"> *</span>
-          </div>
-          <input
-            {...register("slug", {
-              required: "Slug is required",
-              pattern: {
-                value: /^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/,
-                message: "Invalid Slug",
-              },
-            })}
-            className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-2/5 h-7"
-            type={"text"}
-          ></input>
-          {formState.errors.slug?.message && (
-            <p className="text-red-600 italic	text-sm mt-1">
-              <>
-                <ExclamationTriangleIcon className="w-4 inline" />
-                {formState.errors.slug?.message}
-              </>
-            </p>
-          )}
         </div>
 
         <div className="py-10">
@@ -223,14 +236,6 @@ const EditArticle = () => {
           </div>
           <Editor setEditorValue={setEditorValue} editorValue={editorValue} />
         </div>
-
-        <ArticleRelation
-          category={category}
-          author={author}
-          tag={tag}
-          relation={relation}
-          setRelation={setRelation}
-        ></ArticleRelation>
       </div>
     </form>
   );

@@ -12,16 +12,16 @@ interface props {
 }
 
 const SidebarItem = ({activeContent, setActiveContent, name, Icon }: props) => {
-  let styleContent = "grid grid-cols-3 px-2 py-2 hover:bg-blue-100 cursor-pointer hover:rounded hover:font-medium m-1"
+  let styleContent = "grid grid-cols-3 px-2 py-2 font-medium hover:bg-blue-100 cursor-pointer hover:rounded hover:font-bold m-1"
   if(activeContent === name)
   {
-    styleContent += " m-1 bg-blue-100 rounded-lg font-medium"
+    styleContent += " m-1 bg-blue-100 rounded-lg font-bold"
   }
 
   return (
     <Link to={`/write/${name}`}>
       <li onClick={()=>{setActiveContent(name)}} className={styleContent}>
-        <span className="px-4 col-span-2 capitalize text-center text-blue-800 text-sm">{name}</span>
+        <span className="px-4 col-span-2 capitalize text-center text-blue-800 text-sm ">{name}</span>
         <Icon className="h-6 w-6 justify-self-center col-span-1 text-blue-800 text-sm	" />
       </li>
     </Link>

@@ -43,15 +43,18 @@ const ArticleRelation = ({
   setRelation,
 }: Props) => {
   return (
-    <div className="p-4 uppercase">
-      Relation
-      <div>
-        <label htmlFor="category">Category</label>
+    <div className="my-2 cursor-pointer font-medium w-fix">
+      <div className="mb-4 text-blue-800">RELATION</div>
+      <div className="mb-4">
+        <label htmlFor="category" className="mr-4 text-blue-800">
+          Category
+        </label>
         <select
           name="category"
           onChange={(e) =>
-            setRelation({...relation, category: e.target.value,})
+            setRelation({ ...relation, category: e.target.value })
           }
+          className="border rounded bg-blue-100 border-3 border-blue-800 w-2/5 h-7 align-middle"
         >
           <option key={"default"}>Select</option>
           {category.map((item, index) => (
@@ -59,13 +62,14 @@ const ArticleRelation = ({
           ))}
         </select>
       </div>
-      <div>
-        <label htmlFor="author">Author</label>
+      <div className="mb-4">
+        <label htmlFor="author" className="mr-8 text-blue-800">
+          Author
+        </label>
         <select
           name="author"
-          onChange={(e) =>
-            setRelation({...relation, author: e.target.value, })
-          }
+          onChange={(e) => setRelation({ ...relation, author: e.target.value })}
+          className="border rounded bg-blue-100 border-3 border-blue-800 w-2/5 h-7 align-middle"
         >
           <option key={"default"}>Select</option>
           {author.map((item, index) => (
@@ -73,7 +77,7 @@ const ArticleRelation = ({
           ))}
         </select>
       </div>
-      <Tag tag={tag} relation={relation} setRelation={setRelation}/>
+      <Tag tag={tag} relation={relation} setRelation={setRelation} />
     </div>
   );
 };

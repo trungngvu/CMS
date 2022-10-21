@@ -62,33 +62,36 @@ export default function Tag({ tag, relation, setRelation }: Props) {
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-chip-label">Tag</InputLabel>
-        <Select
-          labelId="demo-multiple-chip-label"
-          id="demo-multiple-chip"
-          multiple
-          value={relation.tag}
-          onChange={handleChange}
-          input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-          renderValue={(selected) => (
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
-            </Box>
-          )}
-          MenuProps={MenuProps}
-        >
-          {tag.map((name) => (
-            <MenuItem
-              key={name.id}
-              value={name.name}
-              style={getStyles(name.name, relation.tag, theme)}
-            >
-              {name.name}
-            </MenuItem>
-          ))}
-        </Select>
+        <InputLabel id="demo-multiple-chip-label">
+          <div className="text-blue-800 font-bold"> Tag</div>
+        </InputLabel>
+          <Select
+            labelId="demo-multiple-chip-label"
+            id="demo-multiple-chip"
+            multiple
+            value={relation.tag}
+            onChange={handleChange}
+            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+            renderValue={(selected) => (
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }} className="">
+                {selected.map((value) => (
+                  <Chip key={value} label={value} />
+                ))}
+              </Box>
+            )}
+            className="b-blue-800 b-1"
+            MenuProps={MenuProps}
+          >
+            {tag.map((name) => (
+              <MenuItem
+                key={name.id}
+                value={name.name}
+                style={getStyles(name.name, relation.tag, theme)}
+              >
+                {name.name}
+              </MenuItem>
+            ))}
+          </Select>
       </FormControl>
     </div>
   );

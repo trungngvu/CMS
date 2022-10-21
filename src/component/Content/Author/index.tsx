@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { successToast, errorToast } from "../../../Toast";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
 
 import instance from "../../../Common/axios";
 
@@ -74,10 +75,12 @@ const EditAuthor = () => {
 
   return (
     <form onSubmit={handleSubmit(handleSave)}>
-      <div className="ml-80 px-10 py-6">
+      <div className="ml-80 px-10 py-6 bg-blue-50 h-screen">
         <div className="py-12">
           <div className="flex justify-between">
-            <h1 className="text-3xl p-">{title || "Create an entry"}</h1>
+            <h1 className="text-3xl text-blue-800 font-medium">
+              {title || "Create an entry"}
+            </h1>
             <div className="flex gap-3">
               <button
                 onClick={handleDelete}
@@ -92,22 +95,24 @@ const EditAuthor = () => {
               />
             </div>
           </div>
-          <div>Collection name: Author</div>
+          <div className="text-blue-600 font-medium">Author</div>
         </div>
-        <div>
-          Name<span className="text-red-600">*</span>
+        <div className="my-2 cursor-pointer text-blue-800 font-medium w-fix">
+          Name<span className="text-red-600"> *</span>
         </div>
         <input
           {...register("name", { required: true })}
-          className="border rounded"
+          className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-2/5 h-7"
           type={"text"}
         ></input>
         {errors.name?.type === "required" && (
-          <p role="alert">Name is required</p>
+          <p role="alert" className="text-red-600 italic text-sm mt-1">
+            <ExclamationTriangleIcon className="w-4 inline" /> Name is required
+          </p>
         )}
 
-        <div>
-          Email<span className="text-red-600">*</span>
+        <div className="my-2 cursor-pointer text-blue-800 font-medium w-fix">
+          Email<span className="text-red-600"> *</span>
         </div>
         <input
           {...register("email", {
@@ -117,12 +122,12 @@ const EditAuthor = () => {
               message: "Invalid Email",
             },
           })}
-          className="border rounded"
           type={"text"}
+          className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-2/5 h-7"
         ></input>
         {formState.errors.email?.message && (
-          <p>
-            <>{formState.errors.email?.message}</>
+          <p role="alert" className="text-red-600 italic text-sm mt-1">
+            <ExclamationTriangleIcon className="w-4 inline" /> Email is required
           </p>
         )}
       </div>
