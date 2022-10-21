@@ -1,3 +1,4 @@
+import { useState } from "react";
 import SidebarItem from "./item";
 
 interface vectorprops {
@@ -11,10 +12,11 @@ interface props {
   }[];
 }
 const SidebarItems = ({ items }: props) => {
+  const [activeContent, setActiveContent] = useState("");
   return (
     <>
       {items.map((item, index) => {
-        return <SidebarItem name={item.name} Icon={item.Icon} key={index} />;
+        return <SidebarItem activeContent={activeContent} setActiveContent={setActiveContent} name={item.name} Icon={item.Icon} key={index} />;
       })}
     </>
   );

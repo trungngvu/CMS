@@ -2,21 +2,21 @@ import { Outlet, Link } from "react-router-dom";
 import Item from "./item";
 
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
+import { useState } from "react";
 
 export default function Sidebar() {
+  const [active, setActive] = useState("");
   return (
     <>
       <nav className="w-40 flex flex-col h-screen fixed top-0 left-0 border-r">
         <Link to={"/"} className="h-12 mx-auto">
-          <img
-            src="https://batgroup.vn/wp-content/uploads/2020/05/logo-batgroup.vn_.png"
-            className="h-full py-1 hover:scale-110 hover:rounded"
-          />
+          <div className="px-4 col-span-2 capitalize h-12 text-center text-blue-800 font-bold pt-2.5 hover:scale-110">Đây là LOGO</div>
+          
         </Link>
         <hr className="text-gray-100" />
         <ul>
           <Link to="/write">
-            <Item name="Content" Vector={PencilSquareIcon} />
+            <Item active={active} setActive={setActive} name="Content" Vector={PencilSquareIcon} />
           </Link>
         </ul>
       </nav>
