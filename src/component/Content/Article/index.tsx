@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { successToast, errorToast } from "../../../Toast";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
 
 import Editor from "../../Quill";
 import instance from "../../../Common/axios";
@@ -132,14 +133,14 @@ const EditArticle = () => {
     }
   };
 
-  console.log(relation);
-
   return (
     <form onSubmit={handleSubmit(handleSave)}>
-      <div className="ml-80 px-10 py-6">
+      <div className="ml-80 px-10 py-6 bg-blue-50">
         <div className="py-12">
           <div className="flex justify-between">
-            <h1 className="text-3xl p-">{title || "Create an entry"}</h1>
+            <h1 className="text-3xl text-blue-800 font-medium">
+              {title || "Create an entry"}
+            </h1>
             <div className="flex gap-3">
               <button
                 onClick={handleDelete}
@@ -154,57 +155,75 @@ const EditArticle = () => {
               />
             </div>
           </div>
-          <div>Collection name: Article</div>
+          <div className="text-blue-600 font-medium">Article</div>
         </div>
 
-        <div>
-          Title<span className="text-red-600">*</span>
-        </div>
-        <input
-          {...register("title", { required: true })}
-          className="border rounded"
-          type={"text"}
-        ></input>
-        {errors.title?.type === "required" && (
-          <p role="alert">Title is required</p>
-        )}
+        <div className="grid grid-rows-2">
+          <div>
+            <div className="mb-2 cursor-pointer text-blue-800 font-medium hover:underline w-fix">
+              Title<span className="text-red-600"> *</span>
+            </div>
+            <input
+              {...register("title", { required: true })}
+              className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-2/5 h-7"
+              type={"text"}
+            ></input>
+            {errors.title?.type === "required" && (
+              <p role="alert" className="text-red-600 italic text-sm mt-1">
+                <ExclamationTriangleIcon className="w-4 inline" /> Title is
+                required
+              </p>
+            )}
+          </div>
 
-        <div>
-          Description<span className="text-red-600">*</span>
+          <div>
+            <div className="mb-2 cursor-pointer text-blue-800 font-medium hover:underline w-fix">
+              Description<span className="text-red-600"> *</span>
+            </div>
+            <input
+              {...register("description", { required: true })}
+              className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-2/5 h-7"
+              type={"text"}
+            ></input>
+            {errors.description?.type === "required" && (
+              <p role="alert" className="text-red-600 italic text-sm mt-1">
+                <ExclamationTriangleIcon className="w-4 inline" /> Description
+                is required
+              </p>
+            )}
+          </div>
+
+          <div className="mb-2 cursor-pointer text-blue-800 font-medium hover:underline w-fix">
+            Slug<span className="text-red-600"> *</span>
+          </div>
+          <input
+            {...register("slug", {
+              required: "Slug is required",
+              pattern: {
+                value: /^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/,
+                message: "Invalid Slug",
+              },
+            })}
+            className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-2/5 h-7"
+            type={"text"}
+          ></input>
+          {formState.errors.slug?.message && (
+            <p className="text-red-600 italic	text-sm mt-1">
+              <>
+                <ExclamationTriangleIcon className="w-4 inline" />
+                {formState.errors.slug?.message}
+              </>
+            </p>
+          )}
         </div>
-        <input
-          {...register("description", { required: true })}
-          className="border rounded"
-          type={"text"}
-        ></input>
-        {errors.description?.type === "required" && (
-          <p role="alert">Description is required</p>
-        )}
 
         <div className="py-10">
-          <div>Content</div>
+          <div className="mb-2 cursor-pointer text-blue-800 font-medium hover:underline w-fix">
+            Content
+          </div>
           <Editor setEditorValue={setEditorValue} editorValue={editorValue} />
         </div>
 
-        <div>
-          Slug<span className="text-red-600">*</span>
-        </div>
-        <input
-          {...register("slug", {
-            required: "Slug is required",
-            pattern: {
-              value: /^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/,
-              message: "Invalid Slug",
-            },
-          })}
-          className="border rounded"
-          type={"text"}
-        ></input>
-        {formState.errors.slug?.message && (
-          <p>
-            <>{formState.errors.slug?.message}</>
-          </p>
-        )}
         <ArticleRelation
           category={category}
           author={author}

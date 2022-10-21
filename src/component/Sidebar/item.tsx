@@ -10,9 +10,9 @@ interface Props {
 }
 
 const Item = ({active, name, Vector, setActive }: Props) => {
-  let style = "grid grid-cols-3 px-2 py-2 hover:bg-gray-300 cursor-pointer hover:scale-110 hover:rounded"
+  let style = "grid grid-cols-3 px-2 py-2 hover:bg-blue-100 cursor-pointer hover:font-medium m-1 hover:rounded"
   if(active === name){
-    style += " m-1 bg-blue-100 rounded-lg font-medium"
+    style += " bg-blue-100 rounded-lg font-medium"
   }
   return (
     <li onClick={()=>{setActive(name)}} className={style}>

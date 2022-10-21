@@ -12,7 +12,7 @@ interface props {
 }
 
 const SidebarItem = ({activeContent, setActiveContent, name, Icon }: props) => {
-  let styleContent = "grid grid-cols-3 px-2 py-2 hover:bg-gray-300 cursor-pointer hover:scale-110 hover:rounded"
+  let styleContent = "grid grid-cols-3 px-2 py-2 hover:bg-blue-100 cursor-pointer hover:rounded hover:font-medium m-1"
   if(activeContent === name)
   {
     styleContent += " m-1 bg-blue-100 rounded-lg font-medium"
