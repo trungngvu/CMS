@@ -37,8 +37,20 @@ const EditArticle = () => {
       email: string;
     }[]
   >([]);
+  const [tag, setTag] = useState<
+    {
+      createAt: string;
+      id: string;
+      name: string;
+      updateAt: string;
+    }[]
+  >([]);
   //Relation value
-  const [relation, setRelation] = useState({ category: "", author: "" });
+  const [relation, setRelation] = useState({
+    category: "",
+    author: "",
+    tag: [""],
+  });
 
   const [propagation, stopPropagation] = useState(false);
   const navigate = useNavigate();
@@ -67,6 +79,12 @@ const EditArticle = () => {
       .get("/author")
       .then((res) => {
         setAuthor(res.data);
+      })
+      .catch((err) => errorToast(err.code));
+    instance
+      .get("/tag")
+      .then((res) => {
+        setTag(res.data);
       })
       .catch((err) => errorToast(err.code));
   }, []);
@@ -100,7 +118,7 @@ const EditArticle = () => {
 
   const handleDelete = () => {
     stopPropagation(true);
-    if (id !=="")
+    if (id !== "")
       instance
         .delete(`/article/${id}`)
         .then(() => {
@@ -113,6 +131,8 @@ const EditArticle = () => {
       navigate(-1);
     }
   };
+
+  console.log(relation);
 
   return (
     <form onSubmit={handleSubmit(handleSave)}>
@@ -188,6 +208,7 @@ const EditArticle = () => {
         <ArticleRelation
           category={category}
           author={author}
+          tag={tag}
           relation={relation}
           setRelation={setRelation}
         ></ArticleRelation>

@@ -10,6 +10,7 @@ import WriteSidebar from "./component/Content/Sidebar";
 import EditArticle from "./component/Content/Article";
 import EditCategory from "./component/Content/Category";
 import EditAuthor from "./component/Content/Author";
+import EditTag from "./component/Content/Tag";
 import ContentManager from "./component/Content/Manager";
 
 const App = () => {
@@ -46,6 +47,11 @@ const App = () => {
               <Route index element={<ContentManager />} />
               <Route path="create" element={<EditAuthor />} />
               <Route path=":id" element={<EditAuthor />} />
+            </Route>
+            <Route path="tag">
+              <Route index element={<ContentManager />} />
+              <Route path="create" element={<EditTag />} />
+              <Route path=":id" element={<EditTag />} />
             </Route>
           </Route>
         </Route>

@@ -1,3 +1,5 @@
+import Tag from "./tag";
+
 interface Props {
   category: {
     createAt: string;
@@ -13,14 +15,22 @@ interface Props {
     updateAt: string;
     email: string;
   }[];
+  tag: {
+    createAt: string;
+    id: string;
+    name: string;
+    updateAt: string;
+  }[];
   relation: {
     category: string;
     author: string;
+    tag: string[];
   };
   setRelation: React.Dispatch<
     React.SetStateAction<{
       category: string;
       author: string;
+      tag: string[];
     }>
   >;
 }
@@ -29,6 +39,7 @@ const ArticleRelation = ({
   category,
   author,
   relation,
+  tag,
   setRelation,
 }: Props) => {
   return (
@@ -39,7 +50,7 @@ const ArticleRelation = ({
         <select
           name="category"
           onChange={(e) =>
-            setRelation({ category: e.target.value, author: relation.author })
+            setRelation({...relation, category: e.target.value,})
           }
         >
           <option key={"default"}>Select</option>
@@ -53,7 +64,7 @@ const ArticleRelation = ({
         <select
           name="author"
           onChange={(e) =>
-            setRelation({ author: e.target.value, category: relation.category })
+            setRelation({...relation, author: e.target.value, })
           }
         >
           <option key={"default"}>Select</option>
@@ -62,6 +73,7 @@ const ArticleRelation = ({
           ))}
         </select>
       </div>
+      <Tag tag={tag} relation={relation} setRelation={setRelation}/>
     </div>
   );
 };
