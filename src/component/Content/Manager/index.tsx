@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
+import { errorToast } from "../../../Toast";
 
 import Table from "./table";
 import instance from "../../../Common/axios";
-import toastProps from "../../../Common/toastProps";
 
-const ContentManager = ({ errorToast }: toastProps) => {
+const ContentManager = () => {
   const [tableData, setTableData] = useState([]);
   const navigate = useNavigate();
+  
   //get last path of the URL
   const location = useLocation();
   const api = location.pathname.slice(

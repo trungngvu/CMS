@@ -1,13 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { successToast, errorToast } from "../../../Toast";
 
-import toastProps from "../../../Common/toastProps";
 import Editor from "../../Quill";
 import instance from "../../../Common/axios";
 import ArticleRelation from "./relation";
 
-const EditArticle = ({ successToast, errorToast }: toastProps) => {
+const EditArticle = () => {
   const {
     register,
     handleSubmit,
@@ -46,7 +46,7 @@ const EditArticle = ({ successToast, errorToast }: toastProps) => {
   const id = useParams().id || "";
 
   useEffect(() => {
-    id != "" &&
+    id !== "" &&
       instance
         .get(`/article/${id}`)
         .then((res) => {
@@ -72,8 +72,8 @@ const EditArticle = ({ successToast, errorToast }: toastProps) => {
   }, []);
 
   const handleSave = (data: any) => {
-    if (propagation == false)
-      if (id != "") {
+    if (propagation === false)
+      if (id !== "") {
         instance
           .put(`/article/${id}`, {
             ...data,
@@ -100,7 +100,7 @@ const EditArticle = ({ successToast, errorToast }: toastProps) => {
 
   const handleDelete = () => {
     stopPropagation(true);
-    if (id != "")
+    if (id !=="")
       instance
         .delete(`/article/${id}`)
         .then(() => {

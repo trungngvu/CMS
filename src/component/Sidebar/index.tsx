@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
+import { PencilSquareIcon } from "@heroicons/react/24/solid";
+
 import Item from "./item";
 
-import { PencilSquareIcon } from "@heroicons/react/24/solid";
-import { useState } from "react";
 
 export default function Sidebar() {
   const [active, setActive] = useState("");

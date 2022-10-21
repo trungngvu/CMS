@@ -1,12 +1,18 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { successToast, errorToast } from "../../../Toast";
 
-import toastProps from "../../../Common/toastProps";
 import instance from "../../../Common/axios";
 
-const EditAuthor = ({ successToast, errorToast }: toastProps) => {
-  const { register, handleSubmit, setValue } = useForm();
+const EditAuthor = () => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    formState,
+  } = useForm();
   const [title, setTitle] = useState("");
   const [propagation, stopPropagation] = useState(false);
   const navigate = useNavigate();
@@ -14,7 +20,7 @@ const EditAuthor = ({ successToast, errorToast }: toastProps) => {
   const id = useParams().id || "";
 
   useEffect(() => {
-    id != "" &&
+    id !== "" &&
       instance
         .get(`/author/${id}`)
         .then((res) => {
@@ -26,8 +32,8 @@ const EditAuthor = ({ successToast, errorToast }: toastProps) => {
   }, []);
 
   const handleSave = (data: any) => {
-    if (propagation == false)
-      if (id != "") {
+    if (propagation === false)
+      if (id !== "") {
         instance
           .put(`/author/${id}`, {
             ...data,
@@ -52,7 +58,7 @@ const EditAuthor = ({ successToast, errorToast }: toastProps) => {
 
   const handleDelete = () => {
     stopPropagation(true);
-    if (id != "")
+    if (id !== "")
       instance
         .delete(`/author/${id}`)
         .then(() => {
@@ -96,17 +102,29 @@ const EditAuthor = ({ successToast, errorToast }: toastProps) => {
           className="border rounded"
           type={"text"}
         ></input>
+        {errors.name?.type === "required" && (
+          <p role="alert">Name is required</p>
+        )}
+
         <div>
           Email<span className="text-red-600">*</span>
         </div>
         <input
           {...register("email", {
-            required: true,
-            pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+            required: "Email is required",
+            pattern: {
+              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+              message: "Invalid Email",
+            },
           })}
           className="border rounded"
           type={"text"}
         ></input>
+        {formState.errors.email?.message && (
+          <p>
+            <>{formState.errors.email?.message}</>
+          </p>
+        )}
       </div>
     </form>
   );
