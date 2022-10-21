@@ -1,12 +1,18 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { successToast, errorToast } from "../../../Toast";
 
-import toastProps from "../../../Common/toastProps";
 import instance from "../../../Common/axios";
 
-const EditCategory = ({ successToast, errorToast }: toastProps) => {
-  const { register, handleSubmit, setValue } = useForm();
+const EditCategory = () => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    formState,
+  } = useForm();
   const [title, setTitle] = useState("");
   const [propagation, stopPropagation] = useState(false);
   const navigate = useNavigate();
@@ -14,7 +20,7 @@ const EditCategory = ({ successToast, errorToast }: toastProps) => {
   const id = useParams().id || "";
 
   useEffect(() => {
-    id != "" &&
+    id !== "" &&
       instance
         .get(`/category/${id}`)
         .then((res) => {
@@ -26,8 +32,8 @@ const EditCategory = ({ successToast, errorToast }: toastProps) => {
   }, []);
 
   const handleSave = (data: any) => {
-    if (propagation == false)
-      if (id != "") {
+    if (propagation === false)
+      if (id !== "") {
         instance
           .put(`/category/${id}`, {
             ...data,
@@ -52,7 +58,7 @@ const EditCategory = ({ successToast, errorToast }: toastProps) => {
 
   const handleDelete = () => {
     stopPropagation(true);
-    if (id != "")
+    if (id !== "")
       instance
         .delete(`/category/${id}`)
         .then(() => {
@@ -96,18 +102,29 @@ const EditCategory = ({ successToast, errorToast }: toastProps) => {
           className="border rounded"
           type={"text"}
         ></input>
+        {errors.name?.type === "required" && (
+          <p role="alert">Name is required</p>
+        )}
 
         <div>
           Slug<span className="text-red-600">*</span>
         </div>
         <input
           {...register("slug", {
-            required: true,
-            pattern: /^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/,
+            required: "Slug is required",
+            pattern: {
+              value: /^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/,
+              message: "Invalid Slug",
+            },
           })}
           className="border rounded"
           type={"text"}
         ></input>
+        {formState.errors.slug?.message && (
+          <p>
+            <>{formState.errors.slug?.message}</>
+          </p>
+        )}
       </div>
     </form>
   );
