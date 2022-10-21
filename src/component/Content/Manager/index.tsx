@@ -24,16 +24,16 @@ const ContentManager = () => {
   }, [api]);
 
   return (
-    <div className="ml-80 px-10 py-6">
-      <div className="container ">
-        <div className="pb-6 cursor-pointer" onClick={() => navigate(-1)}>
+    <div className="ml-80 px-10 py-6 h-screen bg-blue-50">
+      <div className="container">
+        <div className="pb-6 cursor-pointer text-blue-800 font-medium hover:underline" onClick={() => navigate(-1)}>
           Back
         </div>
         <div className="flex justify-between">
-          <div className="font-bold text-lg capitalize">{api}</div>
+          <div className="font-bold text-lg capitalize text-blue-800">{api}</div>
           <Link
             to={`/write/${api}/create`}
-            className="bg-blue-700 text-white pl-8 pr-4 py-2 rounded-md text-sm relative"
+            className="bg-blue-800 text-white pl-8 pr-4 py-2 rounded-md text-sm relative hover:scale-110"
           >
             <span className="pr-4 text-xl font-bold absolute -translate-x-5 -translate-y-1 ">
               +

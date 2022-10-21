@@ -23,8 +23,8 @@ const WriteSidebar = () => {
 
   return (
     <>
-      <nav className="w-40 flex flex-col h-screen fixed top-0 left-0 border-r ml-40">
-        <div className="h-12 text-center">Content</div>
+      <nav className="w-40 flex flex-col h-screen fixed top-0 left-0 border-r ml-40 bg-blue-50">
+        <div className="h-12 text-center text-blue-800 font-medium pt-2.5 text-xl">Content</div>
         <hr className="text-gray-100 w-8 ml-3" />
         <ul>
           <SidebarItems items={pages} />

@@ -17,7 +17,7 @@ const Table = ({ data }: props) => {
   return (
     <table>
       <thead>
-      <tr key={"header"}>
+      <tr key={"header"} className="text-blue-800">
         {Object.keys(data[0]).map((key,index) => (
           <th key={index}>{key}</th>
         ))}
@@ -28,7 +28,7 @@ const Table = ({ data }: props) => {
         <tr
           key={item.id}
           onClick={() => handleClick(item.id)}
-          className="cursor-pointer hover:bg-slate-100"
+          className="cursor-pointer hover:bg-blue-100"
         >
           {Object.values(item).map((val,index) => (
             <td key={index}>{val}</td>
