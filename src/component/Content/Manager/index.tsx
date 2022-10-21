@@ -26,8 +26,8 @@ const ContentManager = () => {
   return (
     <div className="ml-80 px-10 py-6 h-screen bg-blue-50">
       <div className="container">
-        <div className="pb-6 cursor-pointer text-blue-800 font-medium hover:underline" onClick={() => navigate(-1)}>
-          Back
+        <div className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline w-fix" onClick={() => navigate(-1)}>
+        &crarr;   Back
         </div>
         <div className="flex justify-between">
           <div className="font-bold text-lg capitalize text-blue-800">{api}</div>
