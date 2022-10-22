@@ -1,5 +1,3 @@
-import { StringLiteral } from "typescript";
-
 export interface categoryTypes {
   createAt: string;
   id: string;

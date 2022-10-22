@@ -13,7 +13,7 @@ import {
   authorTypes,
   tagTypes,
   relationType,
-} from "../../../Common/Types/type";
+} from "../../../Common/Types";
 
 const EditArticle = () => {
   const {

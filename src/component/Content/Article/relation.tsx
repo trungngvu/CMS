@@ -1,38 +1,18 @@
 import Tag from "./tag";
 
+import {
+  authorTypes,
+  categoryTypes,
+  tagTypes,
+  relationType,
+} from "../../../Common/Types";
+
 interface Props {
-  category: {
-    createAt: string;
-    id: string;
-    name: string;
-    updateAt: string;
-    slug: string;
-  }[];
-  author: {
-    createAt: string;
-    id: string;
-    name: string;
-    updateAt: string;
-    email: string;
-  }[];
-  tag: {
-    createAt: string;
-    id: string;
-    name: string;
-    updateAt: string;
-  }[];
-  relation: {
-    category: string;
-    author: string;
-    tag: string[];
-  };
-  setRelation: React.Dispatch<
-    React.SetStateAction<{
-      category: string;
-      author: string;
-      tag: string[];
-    }>
-  >;
+  category: categoryTypes[];
+  author: authorTypes[];
+  tag: tagTypes[];
+  relation: relationType;
+  setRelation: React.Dispatch<React.SetStateAction<relationType>>;
 }
 
 const ArticleRelation = ({
