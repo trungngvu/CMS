@@ -97,14 +97,14 @@ const EditAuthor = () => {
             <div className="flex gap-3">
               <button
                 onClick={handleDelete}
-                className="bg-red-600 text-white px-4 rounded-md text-sm relative"
+                className="bg-red-600 text-white px-4 rounded-md text-sm relative hover:bg-red-400"
               >
                 Delete
               </button>
               <input
                 type="submit"
                 value="Save"
-                className="bg-blue-700 text-white px-4 rounded-md text-sm relative cursor-pointer"
+                className="bg-blue-700 text-white px-4 rounded-md text-sm relative cursor-pointer hover:bg-blue-500"
               />
             </div>
           </div>
@@ -131,7 +131,7 @@ const EditAuthor = () => {
           {...register("email", {
             required: "Email is required",
             pattern: {
-              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+              value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
               message: "Invalid Email",
             },
           })}
@@ -140,7 +140,10 @@ const EditAuthor = () => {
         ></input>
         {formState.errors.email?.message && (
           <p role="alert" className="text-red-600 italic text-sm mt-1">
-            <ExclamationTriangleIcon className="w-4 inline" /> Email is required
+            <>
+              <ExclamationTriangleIcon className="w-4 inline" />{" "}
+              {formState.errors.email?.message}
+            </>
           </p>
         )}
       </div>

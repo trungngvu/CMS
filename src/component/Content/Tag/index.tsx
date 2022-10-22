@@ -12,7 +12,6 @@ const EditTag = () => {
     handleSubmit,
     setValue,
     formState: { errors },
-    formState,
   } = useForm();
   const [title, setTitle] = useState("");
   const [propagation, stopPropagation] = useState(false);
@@ -98,14 +97,14 @@ const EditTag = () => {
             <div className="flex gap-3">
               <button
                 onClick={handleDelete}
-                className="bg-red-600 text-white px-4 rounded-md text-sm relative"
+                className="bg-red-600 text-white px-4 rounded-md text-sm relative hover:bg-red-400"
               >
                 Delete
               </button>
               <input
                 type="submit"
                 value="Save"
-                className="bg-blue-700 text-white px-4 rounded-md text-sm relative cursor-pointer"
+                className="bg-blue-700 text-white px-4 rounded-md text-sm relative cursor-pointer hover:bg-blue-500"
               />
             </div>
           </div>
