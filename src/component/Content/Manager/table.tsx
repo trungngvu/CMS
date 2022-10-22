@@ -29,7 +29,9 @@ const Table = ({ data }: props) => {
         <thead>
           <tr key={"header"} className="text-blue-800">
             {Object.keys(data[0]).map((key, index) => (
-              <th key={index}>{key}</th>
+              <th key={index} className="uppercase">
+                {key}
+              </th>
             ))}
           </tr>
         </thead>
