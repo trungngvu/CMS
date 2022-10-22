@@ -3,6 +3,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 interface props {
   data: {
     id: number;
+    createAt?: string;
+    updateAt?: string;
+    content?: string;
   }[];
 }
 
@@ -13,6 +16,12 @@ const Table = ({ data }: props) => {
   const handleClick = (id: number) => {
     navigate(`${pathName}/${id}`);
   };
+
+  data.map((item) => {
+    delete item.createAt;
+    delete item.updateAt;
+    delete item.content;
+  });
 
   return (
     <div className="overflow-auto">
