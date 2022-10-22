@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { successToast, errorToast } from "../../../Toast";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
+import { toast } from "react-toastify";
 
 import instance from "../../../Common/axios";
 
@@ -29,54 +29,70 @@ const EditCategory = () => {
           setValue("name", res.data.name);
           setValue("slug", res.data.slug);
         })
-        .catch((err) => errorToast(err.code));
+        .catch((err) => toast.error(err.code));
   }, []);
 
   const handleSave = (data: any) => {
     if (propagation === false)
       if (id !== "") {
-        instance
+        var updatePromise = instance
           .put(`/category/${id}`, {
             ...data,
           })
           .then(() => {
-            successToast("Update successfully!");
             navigate(-1);
-          })
-          .catch((err) => errorToast(err.code));
+          });
+        toast.promise(updatePromise, {
+          pending: "Updating...",
+          success: "Updated successfully!",
+          error: "Fail!! Check the console for detail",
+        });
       } else {
-        instance
+        var createPromise = instance
           .post(`/category`, {
             ...data,
           })
           .then((res) => {
-            successToast("Create sucessfully");
             navigate(-1);
-          })
-          .catch((err) => errorToast(err.code));
+          });
+        toast.promise(createPromise, {
+          pending: "Creating...",
+          success: "Created successfully!",
+          error: "Fail!! Check the console for detail",
+        });
       }
   };
 
   const handleDelete = () => {
     stopPropagation(true);
-    if (id !== "")
-      instance
+    if (id !== "") {
+      var deletePromise = instance
         .delete(`/category/${id}`)
         .then(() => {
-          successToast("Delete successfully!");
           navigate(-1);
         })
-        .catch((err) => errorToast(err.code));
-    else {
-      successToast("Delete successfully!");
+        .catch((err) => toast.error(err.code));
+      toast.promise(deletePromise, {
+        pending: "Deleting...",
+        success: "Deleted successfully!",
+        error: "Fail!! Check the console for detail",
+      });
+    } else {
+      toast.success("Deleted successfully!");
       navigate(-1);
     }
   };
 
   return (
     <form onSubmit={handleSubmit(handleSave)}>
-      <div className="ml-80 px-10 py-6 bg-blue-50 h-screen">
-        <div className="py-12">
+      <div className="ml-80 px-10 py-6 bg-blue-50 min-h-screen h-full">
+        <div
+          className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline w-fix"
+          onClick={() => navigate(-1)}
+        >
+          &crarr; Back
+        </div>
+        <div className="pt-4 pb-8">
           <div className="flex justify-between">
             <h1 className="text-3xl text-blue-800 font-medium">
               {title || "Create an entry"}

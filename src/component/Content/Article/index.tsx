@@ -1,13 +1,19 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { successToast, errorToast } from "../../../Toast";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
+import { toast } from "react-toastify";
 
 import Editor from "../../Quill";
 import instance from "../../../Common/axios";
 import ArticleRelation from "./relation";
-import { DEFAULT_MAX_VERSION } from "tls";
+
+import {
+  categoryTypes,
+  authorTypes,
+  tagTypes,
+  relationType,
+} from "../../../Common/Types/type";
 
 const EditArticle = () => {
   const {
@@ -21,37 +27,14 @@ const EditArticle = () => {
   const [title, setTitle] = useState("");
 
   //Relation data
-  const [category, setCategory] = useState<
-    {
-      createAt: string;
-      id: string;
-      name: string;
-      updateAt: string;
-      slug: string;
-    }[]
-  >([]);
-  const [author, setAuthor] = useState<
-    {
-      createAt: string;
-      id: string;
-      name: string;
-      updateAt: string;
-      email: string;
-    }[]
-  >([]);
-  const [tag, setTag] = useState<
-    {
-      createAt: string;
-      id: string;
-      name: string;
-      updateAt: string;
-    }[]
-  >([]);
+  const [category, setCategory] = useState<categoryTypes[]>([]);
+  const [author, setAuthor] = useState<authorTypes[]>([]);
+  const [tag, setTag] = useState<tagTypes[]>([]);
   //Relation value
-  const [relation, setRelation] = useState({
+  const [relation, setRelation] = useState<relationType>({
     category: "",
     author: "",
-    tag: [""],
+    tag: [],
   });
 
   const [propagation, stopPropagation] = useState(false);
@@ -70,74 +53,86 @@ const EditArticle = () => {
           setValue("slug", res.data.slug);
           setEditorValue(res.data.content);
         })
-        .catch((err) => errorToast(err.code));
+        .catch((err) => toast.error("GET article error: ", err.code));
     instance
       .get("/category")
       .then((res) => {
         setCategory(res.data);
       })
-      .catch((err) => errorToast(err.code));
+      .catch((err) => toast.error("GET category error: ", err.code));
     instance
       .get("/author")
       .then((res) => {
         setAuthor(res.data);
       })
-      .catch((err) => errorToast(err.code));
+      .catch((err) => toast.error("GET author error: ", err.code));
     instance
       .get("/tag")
       .then((res) => {
         setTag(res.data);
       })
-      .catch((err) => errorToast(err.code));
+      .catch((err) => toast.error("GET tag error: ", err.code));
   }, []);
 
   const handleSave = (data: any) => {
     if (propagation === false)
       if (id !== "") {
-        instance
+        var updatePromise = instance
           .put(`/article/${id}`, {
             ...data,
             content: editorValue,
           })
           .then(() => {
-            successToast("Update successfully!");
             navigate(-1);
-          })
-          .catch((err) => errorToast(err.code));
+          });
+        toast.promise(updatePromise, {
+          pending: "Updating...",
+          success: "Updated successfully!",
+          error: "Fail!! Check the console for detail",
+        });
       } else {
-        instance
+        var createPromise = instance
           .post(`/article`, {
             ...data,
             content: editorValue,
           })
           .then((res) => {
-            successToast("Create sucessfully");
             navigate(-1);
-          })
-          .catch((err) => errorToast(err.code));
+          });
+        toast.promise(createPromise, {
+          pending: "Creating...",
+          success: "Created successfully!",
+          error: "Fail!! Check the console for detail",
+        });
       }
   };
-
   const handleDelete = () => {
     stopPropagation(true);
-    if (id !== "")
-      instance
-        .delete(`/article/${id}`)
-        .then(() => {
-          successToast("Delete successfully!");
-          navigate(-1);
-        })
-        .catch((err) => errorToast(err.code));
-    else {
-      successToast("Delete successfully!");
+    if (id !== "") {
+      var deletePromise = instance.delete(`/article/${id}`).then(() => {
+        navigate(-1);
+      });
+      toast.promise(deletePromise, {
+        pending: "Deleting...",
+        success: "Deleted successfully!",
+        error: "Fail!! Check the console for detail",
+      });
+    } else {
+      toast.success("Delete successfully!");
       navigate(-1);
     }
   };
 
   return (
     <form onSubmit={handleSubmit(handleSave)}>
-      <div className="ml-80 px-10 py-6 bg-blue-50">
-        <div className="py-12">
+      <div className="ml-80 px-10 py-6 bg-blue-50 min-h-screen h-full">
+        <div
+          className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline w-fix"
+          onClick={() => navigate(-1)}
+        >
+          &crarr; Back
+        </div>
+        <div className="pt-4 pb-8">
           <div className="flex justify-between">
             <h1 className="text-3xl text-blue-800 font-medium">
               {title || "Create an entry"}
@@ -234,7 +229,9 @@ const EditArticle = () => {
           <div className="mb-2 cursor-pointer text-blue-800 font-medium hover:underline w-fix">
             Content
           </div>
-          <Editor setEditorValue={setEditorValue} editorValue={editorValue} />
+          <div className="border border-blue-800 rounded-md">
+            <Editor setEditorValue={setEditorValue} editorValue={editorValue} />
+          </div>
         </div>
       </div>
     </form>

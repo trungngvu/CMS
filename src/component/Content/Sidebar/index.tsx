@@ -28,7 +28,7 @@ const WriteSidebar = () => {
 
   return (
     <>
-      <nav className="w-40 flex flex-col h-screen fixed top-0 left-0 border-r ml-40 bg-blue-50">
+      <nav className="w-40 flex flex-col min-h-screen h-full fixed top-0 left-0 border-r ml-40 bg-blue-50">
         <div className="h-12 text-center text-blue-800 font-medium pt-2.5 text-xl">
           Content
         </div>

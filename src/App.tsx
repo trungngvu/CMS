@@ -2,8 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 
-import { successToast, errorToast } from "./Toast";
-
 import Sidebar from "./component/Sidebar";
 import Dashboard from "./Pages/Dashboard";
 import WriteSidebar from "./component/Content/Sidebar";
