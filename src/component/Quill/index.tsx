@@ -1,6 +1,8 @@
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-// import { ImageResize } from "quill-image-resize-module--fix-imports-error";
+import { ImageResize } from "quill-image-resize-module-ts";
+
+Quill.register("modules/imageResize", ImageResize);
 
 interface props {
   setEditorValue: (value: string) => void;
@@ -8,7 +10,6 @@ interface props {
 }
 
 export default function Editor({ editorValue, setEditorValue }: props) {
-  // Quill.register("modules/imageResize", ImageResize);
   const modules = {
     toolbar: [
       [{ font: [] }, { header: [1, 2, 3, 4, 5, 6, false] }],
@@ -24,7 +25,7 @@ export default function Editor({ editorValue, setEditorValue }: props) {
       ["link", "image", "video", "formula"],
       ["clean"],
     ],
-    // imageResize: { modules: ["Resize", "DisplaySize"] },
+    imageResize: { modules: ["Resize", "DisplaySize"] },
   };
 
   return (

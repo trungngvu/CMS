@@ -24,6 +24,7 @@ const EditArticle = () => {
     formState,
   } = useForm();
   const [editorValue, setEditorValue] = useState("");
+  console.log(editorValue);
   const [title, setTitle] = useState("");
 
   //Relation data

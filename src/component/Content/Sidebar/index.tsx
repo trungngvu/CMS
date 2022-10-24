@@ -1,4 +1,3 @@
-import SidebarItems from "./items";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
@@ -6,6 +5,8 @@ import { TagIcon } from "@heroicons/react/24/solid";
 import { NewspaperIcon } from "@heroicons/react/24/solid";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { RectangleGroupIcon } from "@heroicons/react/24/solid";
+
+import SidebarItems from "./items";
 const WriteSidebar = () => {
   const [pages, setPages] = useState([
     {
