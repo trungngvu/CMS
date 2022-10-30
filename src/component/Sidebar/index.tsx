@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
 
 import Item from "./item";
 
 export default function Sidebar() {
-  const [active, setActive] = useState("");
   return (
     <>
       <nav className="w-40 flex flex-col min-h-screen h-full fixed top-0 left-0 border-r">
@@ -16,14 +14,10 @@ export default function Sidebar() {
         </Link>
         <hr className="text-gray-100" />
         <ul>
-          <Link to="/write">
             <Item
-              active={active}
-              setActive={setActive}
-              name="Content"
+              name="content"
               Vector={PencilSquareIcon}
             />
-          </Link>
         </ul>
       </nav>
       <Outlet />

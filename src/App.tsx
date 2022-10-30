@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 import Sidebar from './component/Sidebar';
 import Dashboard from './Pages/Dashboard';
-import WriteSidebar from './component/Content/Sidebar';
+import ContentSidebar from './component/Content/Sidebar';
 import EditArticle from './component/Content/Article';
 import EditCategory from './component/Content/Category';
 import EditAuthor from './component/Content/Author';
@@ -43,7 +43,7 @@ const App = () => {
                 {auth ? (
                     <Route path="/" element={<Sidebar />}>
                         <Route index element={<Dashboard />} />
-                        <Route path="write" element={<WriteSidebar />}>
+                        <Route path="content" element={<ContentSidebar />}>
                             <Route path="article">
                                 <Route index element={<ContentManager />} />
                                 <Route path="create" element={<EditArticle />} />

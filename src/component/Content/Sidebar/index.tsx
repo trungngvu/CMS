@@ -7,7 +7,7 @@ import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { RectangleGroupIcon } from "@heroicons/react/24/solid";
 
 import SidebarItems from "./items";
-const WriteSidebar = () => {
+const ContentSidebar = () => {
   const [pages, setPages] = useState([
     {
       name: "article",
@@ -43,4 +43,4 @@ const WriteSidebar = () => {
   );
 };
 
-export default WriteSidebar;
+export default ContentSidebar;

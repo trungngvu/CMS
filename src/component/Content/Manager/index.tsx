@@ -37,7 +37,7 @@ const ContentManager = () => {
             {api}
           </div>
           <Link
-            to={`/write/${api}/create`}
+            to={`/content/${api}/create`}
             className="bg-blue-800 text-white pl-8 pr-4 py-2 rounded-md text-sm relative hover:scale-110"
           >
             <span className="pr-4 text-xl font-bold absolute -translate-x-5 -translate-y-1 ">
