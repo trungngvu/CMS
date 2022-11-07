@@ -85,7 +85,7 @@ const EditCategory = () => {
 
   return (
     <form onSubmit={handleSubmit(handleSave)}>
-      <div className="ml-80 px-10 py-6 bg-blue-50 min-h-screen h-full">
+      <div className="px-10 py-6 bg-blue-50 min-h-screen h-full">
         <div
           className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline w-fix"
           onClick={() => navigate(-1)}
