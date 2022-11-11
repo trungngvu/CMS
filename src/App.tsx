@@ -23,7 +23,7 @@ const App = () => {
     useEffect(() => {
         if (auth === false) navigate('/login');
     }, [auth]);
-
+    console.log(auth);
     return (
         <>
             <ToastContainer
@@ -41,7 +41,7 @@ const App = () => {
 
             <Routes>
                 {auth ? (
-                    <Route path="/" element={<Sidebar />}>
+                    <Route path="/" element={<Sidebar checkOut={() => setAuth(false)} />}>
                         <Route index element={<Dashboard />} />
                         <Route path="content" element={<ContentSidebar />}>
                             <Route path="article">

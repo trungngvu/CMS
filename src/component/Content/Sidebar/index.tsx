@@ -29,7 +29,7 @@ const ContentSidebar = () => {
 
     return (
         <>
-            <nav className="col-span-2 flex flex-col min-h-screen h-full border-r bg-blue-50">
+            <nav className="w-52 col-span-2 flex flex-col min-h-screen h-full border-r bg-blue-50">
                 <div className="h-12 text-center text-blue-800 font-medium pt-2.5 text-xl">Content</div>
                 <hr className="text-gray-100 w-8 ml-3" />
                 <ul>
