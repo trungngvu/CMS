@@ -8,6 +8,8 @@ import { RectangleGroupIcon } from '@heroicons/react/24/solid';
 
 import SidebarItems from './items';
 const ContentSidebar = () => {
+    const [close, setClose] = useState(true);
+    console.log(close);
     const [pages, setPages] = useState([
         {
             name: 'article',
@@ -29,13 +31,14 @@ const ContentSidebar = () => {
 
     return (
         <>
-            <nav className="w-52 col-span-2 flex flex-col min-h-screen h-full border-r bg-blue-50">
-                <div className="h-12 text-center text-blue-800 font-medium pt-2.5 text-xl">Content</div>
-                <hr className="text-gray-100 w-8 ml-3" />
+            {/* {close && ( */}
+            <nav className="w-24 md:w-52 ml-3 rounded-tl-3xl col-span-2 flex flex-col md: bg-white">
+                <div className="hidden md:block h-12 text-center text-blue-800 font-medium pt-2.5 text-xl">Content</div>
                 <ul>
-                    <SidebarItems items={pages} />
+                    <SidebarItems close={() => setClose(false)} items={pages} />
                 </ul>
             </nav>
+            {/* )} */}
             <Outlet />
         </>
     );

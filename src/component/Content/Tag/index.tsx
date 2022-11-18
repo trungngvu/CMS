@@ -82,7 +82,7 @@ const EditTag = () => {
 
     return (
         <form onSubmit={handleSubmit(handleSave)}>
-            <div className="px-10 py-6 bg-blue-50 min-h-screen h-full">
+            <div className="px-10 py-6 bg-white min-h-screen min-w-[700px] h-full rounded-tr-3xl">
                 <div
                     className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline w-fix"
                     onClick={() => navigate(-1)}

@@ -12,9 +12,6 @@ td {
 .ql-editor {
     min-height: 30vh;
 }
-.grid-cols-primary {
-    grid-template-columns: 0% 4% 9% 4% 9% auto 0%;
-}
 input::placeholder {
     color: rgb(46, 45, 44);
     font-weight: 500;

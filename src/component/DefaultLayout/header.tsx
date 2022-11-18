@@ -9,14 +9,13 @@ interface props {
 }
 const Header = ({ checkOut, checkMini }: props) => {
     const [close, setClose] = useState(true);
-    // const [mini, setMini] = useState(true);
     return (
-        <div className="flex h-16 justify-between text-center bg-slate-100 border-0">
+        <div className="flex h-16 justify-between text-center bg-blue-50">
             <div className="flex ml-6">
                 <div onClick={() => checkMini()} className="flex text-center">
                     <Bars3Icon className={`w-8 cursor-pointer text-blue-800`} />
                 </div>
-                <Link to={'/'} className="flex my-auto ml-6">
+                <Link to={'/'} className="hidden md:flex my-auto ml-6">
                     <img className="w-20" src={ReactLogo} alt="React Logo" />
                 </Link>
             </div>
@@ -30,13 +29,13 @@ const Header = ({ checkOut, checkMini }: props) => {
                     placeholder="Tìm kiếm"
                 />
             </div>
-            <div className="py-3 mr-6 flex text-center cursor-pointer relative ">
-                <div onClick={() => setClose(!close)} className="bg-slate-600 w-10 rounded-full "></div>
-                <div className="m-auto ml-2">
+            <div onClick={() => setClose(!close)} className="py-3 mr-6 flex text-center cursor-pointer relative ">
+                <div className="bg-slate-600 w-10 rounded-full "></div>
+                <div className="hidden md:block m-auto ml-2">
                     <p>Admin</p>
                 </div>
                 {!close && (
-                    <div onClick={checkOut} className="bg-slate-100 absolute top-full h-2/3 shadow w-28 rounded-sm">
+                    <div onClick={checkOut} className="bg-blue-50 absolute top-full h-2/3 shadow w-28 rounded-sm">
                         <p className="rounded-sm mt-2">Log out</p>
                     </div>
                 )}

@@ -21,7 +21,7 @@ const ContentManager = () => {
     }, [api]);
 
     return (
-        <div className="w-screen col-span-2 px-10 py-6 min-h-screen h-full bg-blue-50">
+        <div className="col-span-2 px-10 py-6 h-screen ml-0 mr-3 w-screen bg-white rounded-tr-3xl">
             <div className="container">
                 <div
                     className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline w-fix"

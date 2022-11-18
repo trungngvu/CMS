@@ -10,12 +10,13 @@ interface props {
         name: string;
         Icon: React.FC<vectorprops>;
     }[];
+    close: () => void;
 }
-const SidebarItems = ({ items }: props) => {
+const SidebarItems = ({ items, close }: props) => {
     return (
         <>
             {items.map((item, index) => {
-                return <SidebarItem name={item.name} Icon={item.Icon} key={index} />;
+                return <SidebarItem close={close} name={item.name} Icon={item.Icon} key={index} />;
             })}
         </>
     );

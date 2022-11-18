@@ -1,5 +1,6 @@
 import { AtSymbolIcon } from '@heroicons/react/24/solid';
 import { LockClosedIcon } from '@heroicons/react/24/solid';
+import ReactLogo from '../../images/logo.svg';
 import { useState } from 'react';
 
 interface props {
@@ -15,9 +16,11 @@ const Login = ({ checkAuth }: props) => {
     };
     return (
         <div className=" bg-gray-100 flex justify-center items-center h-screen">
-            <div className="hidden md:block bg-blue-700 w-3/12 h-4/5 rounded-tl-3xl rounded-bl-3xl shadow-md"></div>
-            <div className="w-3/12 h-4/5 bg-white rounded-tr-3xl rounded-br-3xl">
-                <div className="text-center py-4 mt-6">Logo</div>
+            <div className="hidden lg:block bg-blue-700 w-3/12 h-4/5 rounded-tl-3xl rounded-bl-3xl shadow-md"></div>
+            <div className="w:1/2 mr-4 ml-4 rounded-l-3xl lg:ml-0 lg:w-3/12 lg:rounded-l-none h-4/5 bg-white rounded-r-3xl">
+                <div className="flex justify-center py-4 mt-6">
+                    <img className="w-32" src={ReactLogo} alt="React Logo" />
+                </div>
                 <div className="text-center py-4 text-3xl font-semibold">Welcome</div>
                 <p className="text-center text-gray-500 px-12 text-sm">
                     Aliquam consectetur et tincidunt praesent enim massa pellentesque velit odio neque
