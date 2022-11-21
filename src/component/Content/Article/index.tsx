@@ -19,7 +19,6 @@ const EditArticle = () => {
         formState,
     } = useForm();
     const [editorValue, setEditorValue] = useState('');
-    console.log(editorValue);
     const [title, setTitle] = useState('');
 
     //Relation data
@@ -121,9 +120,10 @@ const EditArticle = () => {
 
     return (
         <form onSubmit={handleSubmit(handleSave)}>
-            <div className="px-10 py-6 bg-white min-h-screen h-full rounded-tr-3xl">
+            {/* loi o day */}
+            <div className="px-10 py-6 bg-white min-h-screen w-7/8 md:max-w-[calc[100%-20rem]] h-full rounded-tr-3xl">
                 <div
-                    className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline w-fix"
+                    className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline"
                     onClick={() => navigate(-1)}
                 >
                     &crarr; Back
@@ -131,24 +131,11 @@ const EditArticle = () => {
                 <div className="pt-4 pb-8">
                     <div className="flex justify-between">
                         <h1 className="text-3xl text-blue-800 font-medium">{title || 'Create an entry'}</h1>
-                        <div className="flex gap-3">
-                            <button
-                                onClick={handleDelete}
-                                className="bg-red-600 text-white px-4 rounded-md text-sm relative hover:bg-red-400"
-                            >
-                                Delete
-                            </button>
-                            <input
-                                type="submit"
-                                value="Save"
-                                className="bg-blue-700 text-white px-4 rounded-md text-sm relative cursor-pointer hover:bg-blue-500"
-                            />
-                        </div>
                     </div>
                     <div className="text-blue-600 font-medium">Article</div>
                 </div>
 
-                <div className="grid grid-cols-2">
+                <div className="grid grid-cols-1">
                     <div className="grid grid-rows-2">
                         <div>
                             <div className="my-2 cursor-pointer text-blue-800 font-medium w-fix">
@@ -222,6 +209,19 @@ const EditArticle = () => {
                     <div className="border border-blue-800 rounded-md">
                         <Editor setEditorValue={setEditorValue} editorValue={editorValue} />
                     </div>
+                </div>
+                <div className="flex gap-3">
+                    <button
+                        onClick={handleDelete}
+                        className="bg-red-600 text-white py-2 px-6 rounded-md text-sm relative hover:bg-red-400"
+                    >
+                        Delete
+                    </button>
+                    <input
+                        type="submit"
+                        value="Save"
+                        className="bg-blue-700 text-white py-2 px-6 rounded-md text-sm relative cursor-pointer hover:bg-blue-500"
+                    />
                 </div>
             </div>
         </form>

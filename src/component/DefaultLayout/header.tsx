@@ -3,11 +3,14 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import ReactLogo from '../../images/logo.svg';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useWindowDimensions from '../ScreenWidth';
+
 interface props {
     checkOut: () => void;
     checkMini: () => void;
 }
 const Header = ({ checkOut, checkMini }: props) => {
+    const { width } = useWindowDimensions();
     const [close, setClose] = useState(true);
     return (
         <div className="flex h-16 justify-between text-center bg-blue-50">

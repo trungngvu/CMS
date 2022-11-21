@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import SidebarItem from './item';
 
 interface vectorprops {
@@ -10,13 +9,12 @@ interface props {
         name: string;
         Icon: React.FC<vectorprops>;
     }[];
-    close: () => void;
 }
-const SidebarItems = ({ items, close }: props) => {
+const SidebarItems = ({ items }: props) => {
     return (
         <>
             {items.map((item, index) => {
-                return <SidebarItem close={close} name={item.name} Icon={item.Icon} key={index} />;
+                return <SidebarItem name={item.name} Icon={item.Icon} key={index} />;
             })}
         </>
     );

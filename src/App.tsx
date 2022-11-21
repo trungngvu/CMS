@@ -23,7 +23,6 @@ const App = () => {
     useEffect(() => {
         if (auth === false) navigate('/login');
     }, [auth]);
-    console.log(auth);
     return (
         <>
             <ToastContainer

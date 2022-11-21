@@ -15,9 +15,9 @@ const Login = ({ checkAuth }: props) => {
         else setNotf(true);
     };
     return (
-        <div className=" bg-gray-100 flex justify-center items-center h-screen">
+        <div className=" bg-gray-100 flex justify-center items-center h-screen min-h-[650px]">
             <div className="hidden lg:block bg-blue-700 w-3/12 h-4/5 rounded-tl-3xl rounded-bl-3xl shadow-md"></div>
-            <div className="w:1/2 mr-4 ml-4 rounded-l-3xl lg:ml-0 lg:w-3/12 lg:rounded-l-none h-4/5 bg-white rounded-r-3xl">
+            <div className="w:1/2 mr-4 ml-4 rounded-l-3xl lg:ml-0 lg:w-3/12 lg:rounded-l-none h-4/5 min-h-[550px] bg-white rounded-r-3xl ">
                 <div className="flex justify-center py-4 mt-6">
                     <img className="w-32" src={ReactLogo} alt="React Logo" />
                 </div>

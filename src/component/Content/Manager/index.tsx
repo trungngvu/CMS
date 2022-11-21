@@ -21,7 +21,7 @@ const ContentManager = () => {
     }, [api]);
 
     return (
-        <div className="col-span-2 px-10 py-6 h-screen ml-0 mr-3 w-screen bg-white rounded-tr-3xl">
+        <div className="col-span-2 px-10 py-6 h-screen ml-0 mr-3 w-4/5 md:w-screen bg-white rounded-tr-3xl">
             <div className="container">
                 <div
                     className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline w-fix"
@@ -35,14 +35,14 @@ const ContentManager = () => {
                         to={`/content/${api}/create`}
                         className="bg-blue-800 text-white pl-8 pr-4 py-2 rounded-md text-sm relative hover:scale-110"
                     >
-                        <span className="pr-4 text-xl font-bold absolute -translate-x-5 -translate-y-1 ">+</span>
+                        <span className="pr-4 text-xl font-bold -translate-x-5 -translate-y-1 ">+</span>
                         Create new entry
                     </Link>
                 </div>
 
                 <div className="">{tableData.length || 0} entries found</div>
             </div>
-            <div className="py-4">Search Filter </div>
+            <div className="py-4 w-32">Search Filter </div>
             {tableData.length !== 0 && <Table data={tableData} />}
         </div>
     );

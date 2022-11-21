@@ -85,7 +85,7 @@ const EditCategory = () => {
 
     return (
         <form onSubmit={handleSubmit(handleSave)}>
-            <div className="px-10 py-6 bg-white min-h-screen min-w-[700px] h-full rounded-tr-3xl">
+            <div className="px-10 py-6 bg-white min-h-screen w-7/8 md:min-w-[950px] h-full rounded-tr-3xl">
                 <div
                     className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline w-fix"
                     onClick={() => navigate(-1)}
@@ -95,19 +95,6 @@ const EditCategory = () => {
                 <div className="pt-4 pb-8">
                     <div className="flex justify-between">
                         <h1 className="text-3xl text-blue-800 font-medium">{title || 'Create an entry'}</h1>
-                        <div className="flex gap-3">
-                            <button
-                                onClick={handleDelete}
-                                className="bg-red-600 text-white px-4 rounded-md text-sm relative hover:bg-red-400"
-                            >
-                                Delete
-                            </button>
-                            <input
-                                type="submit"
-                                value="Save"
-                                className="bg-blue-700 text-white px-4 rounded-md text-sm relative cursor-pointer hover:bg-blue-500"
-                            />
-                        </div>
                     </div>
                     <div className="text-blue-600 font-medium">Category</div>
                 </div>
@@ -116,7 +103,7 @@ const EditCategory = () => {
                 </div>
                 <input
                     {...register('name', { required: true })}
-                    className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-2/5 h-7"
+                    className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-4/5 md:w-2/5 h-7"
                     type={'text'}
                 ></input>
                 {errors.name?.type === 'required' && (
@@ -135,9 +122,22 @@ const EditCategory = () => {
                             message: 'Invalid Slug',
                         },
                     })}
-                    className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-2/5 h-7"
+                    className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-4/5 md:w-2/5 h-7"
                     type={'text'}
                 ></input>
+                <div className="flex mt-10 gap-3">
+                    <button
+                        onClick={handleDelete}
+                        className="bg-red-600 text-white py-2 px-6 rounded-md text-sm relative hover:bg-red-400"
+                    >
+                        Delete
+                    </button>
+                    <input
+                        type="submit"
+                        value="Save"
+                        className="bg-blue-700 text-white py-2 px-6 rounded-md text-sm relative cursor-pointer hover:bg-blue-500"
+                    />
+                </div>
                 {formState.errors.slug?.message && (
                     <p role="alert" className="text-red-600 italic text-sm mt-1">
                         <>
