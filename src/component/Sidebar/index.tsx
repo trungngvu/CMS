@@ -26,7 +26,7 @@ export default function Sidebar({ checkOut }: props) {
                 <div className="flex bg-blue-50">
                     <nav
                         className={`inline-flex flex-col min-h-screen bg-blue-50 relative h-full ${
-                            !openMini ? 'w-20' : 'w-52'
+                            !openMini ? 'w-20' : 'w-44'
                         }`}
                     >
                         <ul>

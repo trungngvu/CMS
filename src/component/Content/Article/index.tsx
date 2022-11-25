@@ -120,8 +120,8 @@ const EditArticle = () => {
 
     return (
         <form onSubmit={handleSubmit(handleSave)}>
-            {/* loi o day */}
-            <div className="px-10 py-6 bg-white min-h-screen max-w-screen-lg md:max-w-[calc[100%-20rem]] h-full rounded-tr-3xl">
+            {/* <div className="px-10 py-6 bg-white min-h-screen max-w-screen-lg md:max-w-[calc[100%-20rem]] h-full rounded-tr-3xl"> */}
+            <div className="px-10 py-6 bg-white max-w-3xl min-h-screen w-7/8 md:min-w-[950px] h-full rounded-3xl">
                 <div
                     className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline"
                     onClick={() => navigate(-1)}

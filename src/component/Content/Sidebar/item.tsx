@@ -20,10 +20,10 @@ const SidebarItem = ({ name, Icon }: props) => {
     const activeStyleContent = 'grid grid-cols-3 px-2 py-2 m-1 bg-blue-100 rounded-lg font-bold';
     return (
         <SubSidebarContext.Consumer>
-            {({ setOpenSub }) => (
+            {({ setOpenSub, openSub }) => (
                 <li
                     onClick={() => {
-                        if (width <= 768) setOpenSub(false);
+                        if (width <= 768) setOpenSub(!openSub);
                     }}
                 >
                     <NavLink

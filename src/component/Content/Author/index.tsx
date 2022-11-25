@@ -82,7 +82,7 @@ const EditAuthor = () => {
 
     return (
         <form onSubmit={handleSubmit(handleSave)}>
-            <div className="px-10 py-6 bg-white min-h-screen w-7/8 md:min-w-[950px] h-full rounded-tr-3xl">
+            <div className="px-10 py-6 bg-white min-h-screen w-7/8 md:min-w-[950px] h-full rounded-3xl">
                 <div
                     className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline w-fix"
                     onClick={() => navigate(-1)}

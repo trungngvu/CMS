@@ -32,7 +32,7 @@ const ContentSidebar = () => {
             <SubSidebarContext.Consumer>
                 {({ openSub }) =>
                     openSub && (
-                        <nav className="w-24 md:w-52 bg-none ml-3 rounded-tl-3xl col-span-2 flex flex-col md:bg-white">
+                        <nav className="w-24 md:w-48 bg-none ml-2 rounded-3xl mr-3 col-span-2 flex flex-col md:bg-white">
                             <div className="hidden md:block h-12 text-center text-blue-800 font-medium pt-2.5 text-xl">
                                 Content
                             </div>
