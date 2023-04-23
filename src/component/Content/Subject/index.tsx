@@ -17,8 +17,8 @@ const EditCategory = () => {
     } = useForm();
     const [title, setTitle] = useState('');
     const [classOptions, setClassOptions] = useState<{ title: string; id: number }[]>([]);
-    const [teacherOptions, setTeacherOptions] = useState<{ name: string; id: number }[]>([]);
     const [classValue, setClassValue] = useState<{ title: string; id: number }[]>([]);
+    const [teacherOptions, setTeacherOptions] = useState<{ name: string; id: number }[]>([]);
     const [teacherValue, setTeacherValue] = useState<{ name: string; id: number }[]>([]);
     const [propagation, stopPropagation] = useState(false);
     const navigate = useNavigate();

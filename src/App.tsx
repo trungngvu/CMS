@@ -9,7 +9,7 @@ import ContentSidebar from './component/Content/Sidebar';
 import EditArticle from './component/Content/Post';
 import EditCategory from './component/Content/Subject';
 import EditAuthor from './component/Content/Teacher';
-import EditTag from './component/Content/Tag';
+import EditTag from './component/Content/Class';
 import ContentManager from './component/Content/Manager';
 import Login from './component/Login';
 
