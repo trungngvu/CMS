@@ -87,7 +87,7 @@ const EditTag = () => {
                     className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline w-fix"
                     onClick={() => navigate(-1)}
                 >
-                    &crarr; Back
+                    &crarr; Quay lại
                 </div>
                 <div className="pt-6 pb-8">
                     <div className="flex flex-col md:flex-row justify-between">

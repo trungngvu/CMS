@@ -16,34 +16,77 @@ const ContentManager = () => {
     useEffect(() => {
         instance
             .get(`/${api}`)
-            .then((res) => setTableData(res.data))
+            .then(({ data }) => {
+                let displayData = [];
+                console.log(data);
+                if (api === 'subject')
+                    displayData = data.map((item: any) => {
+                        delete item.classes;
+                        return {
+                            ...item,
+                        };
+                    });
+                if (api === 'teacher')
+                    displayData = data.map((item: any) => {
+                        delete item.subjects;
+                        return {
+                            ...item,
+                        };
+                    });
+                if (api === 'class')
+                    displayData = data.map((item: any) => {
+                        delete item.subjectId;
+                        delete item.registrationFormId;
+                        return {
+                            ...item,
+                            startDate: new Date(item.startDate).toLocaleDateString(),
+                            endDate: new Date(item.endDate).toLocaleDateString(),
+                        };
+                    });
+                if (api === 'post')
+                    displayData = data.map((item: any) => {
+                        delete item.authorId;
+                        delete item.tags;
+                        delete item.author;
+                        return {
+                            id: item.id,
+                            'tiêu đề': item.title,
+                            'nội dung': item.content,
+                            'đăng tải': item.published ? 'Đã đăng' : 'Chưa đăng',
+                            'ngày viết': new Date(item.createdAt).toLocaleDateString(),
+                            'ngày cập nhật': new Date(item.updatedAt).toLocaleDateString(),
+                        };
+                    });
+                console.log(displayData);
+                setTableData(displayData);
+            })
             .catch((err) => toast.error(err.code));
     }, [api]);
 
     return (
-        // <div className="col-span-2 px-10 py-6 h-screen ml-0 mr-3 w-4/5 md:w-screen bg-white rounded-tr-3xl">
+        // <div className="w-4/5 h-screen col-span-2 px-10 py-6 ml-0 mr-3 bg-white md:w-screen rounded-tr-3xl">
         <div className="px-10 py-6 bg-white min-h-screen md:min-w-[950px] h-full rounded-3xl">
             <div className="container">
                 <div
-                    className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline w-fix"
+                    className="mb-6 font-medium text-blue-800 cursor-pointer hover:underline w-fix"
                     onClick={() => navigate(-1)}
                 >
-                    &crarr; Back
+                    &crarr; Quay lại
                 </div>
-                <div className="flex justify-between flex-col md:flex-row ">
-                    <div className="font-bold text-lg capitalize text-blue-800">{api}</div>
+                <div className="flex flex-col justify-between md:flex-row ">
+                    <div className="text-lg font-bold text-blue-800 capitalize">{api}</div>
                     <Link
                         to={`/content/${api}/create`}
                         className="bg-blue-800 flex my-2 md:my-none justify-center items-center text-white max-w-[170px] md:max-w-none pl-4 pr-4 py-1 md:py-2  rounded-md text-sm relative hover:scale-110"
                     >
-                        <span className="pr-4 text-xl flex justify-center items-center font-bold ">+</span>
+                        <span className="flex items-center justify-center pr-4 text-xl font-bold ">+</span>
                         <p>Create new entry</p>
                     </Link>
                 </div>
 
                 <div className="">{tableData.length || 0} entries found</div>
             </div>
-            <div className="py-4 w-32">Search Filter </div>
+            <div className="w-32 py-4">Search Filter </div>
             {tableData.length !== 0 && <Table data={tableData} />}
         </div>
     );

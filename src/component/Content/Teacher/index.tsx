@@ -23,7 +23,7 @@ const EditAuthor = () => {
     useEffect(() => {
         id !== '' &&
             instance
-                .get(`/author/${id}`)
+                .get(`/teacher/${id}`)
                 .then((res) => {
                     setTitle(res.data.name);
                     setValue('name', res.data.name);
@@ -36,7 +36,7 @@ const EditAuthor = () => {
         if (propagation === false)
             if (id !== '') {
                 var updatePromise = instance
-                    .put(`/author/${id}`, {
+                    .put(`/teacher/${id}`, {
                         ...data,
                     })
                     .then(() => {
@@ -49,7 +49,7 @@ const EditAuthor = () => {
                 });
             } else {
                 var createPromise = instance
-                    .post(`/author`, {
+                    .post(`/teacher`, {
                         ...data,
                     })
                     .then((res) => {
@@ -66,7 +66,7 @@ const EditAuthor = () => {
     const handleDelete = () => {
         stopPropagation(true);
         if (id !== '') {
-            var deletePromise = instance.delete(`/author/${id}`).then(() => {
+            var deletePromise = instance.delete(`/teacher/${id}`).then(() => {
                 navigate(-1);
             });
             toast.promise(deletePromise, {
@@ -84,32 +84,32 @@ const EditAuthor = () => {
         <form onSubmit={handleSubmit(handleSave)}>
             <div className="px-10 py-6 bg-white min-h-screen w-7/8 md:min-w-[950px] h-full rounded-3xl">
                 <div
-                    className="mb-6 cursor-pointer text-blue-800 font-medium hover:underline w-fix"
+                    className="mb-6 font-medium text-blue-800 cursor-pointer hover:underline w-fix"
                     onClick={() => navigate(-1)}
                 >
-                    &crarr; Back
+                    &crarr; Quay lại
                 </div>
                 <div className="pt-4 pb-8">
                     <div className="flex justify-evenly">
-                        <h1 className="text-3xl text-blue-800 font-medium">{title || 'Create an entry'}</h1>
+                        <h1 className="text-3xl font-medium text-blue-800">{title || 'Create an entry'}</h1>
                     </div>
-                    <div className="text-blue-600 font-medium">Author</div>
+                    <div className="font-medium text-blue-600">Author</div>
                 </div>
-                <div className="my-2 cursor-pointer text-blue-800 font-medium w-fix">
+                <div className="my-2 font-medium text-blue-800 cursor-pointer w-fix">
                     Name<span className="text-red-600"> *</span>
                 </div>
                 <input
                     {...register('name', { required: true })}
-                    className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-4/5 md:w-2/5 h-7"
+                    className="w-4/5 p-1 bg-blue-100 border border-blue-800 rounded border-3 md:w-2/5 h-7"
                     type={'text'}
                 ></input>
                 {errors.name?.type === 'required' && (
-                    <p role="alert" className="text-red-600 italic text-sm mt-1">
-                        <ExclamationTriangleIcon className="w-4 inline" /> Name is required
+                    <p role="alert" className="mt-1 text-sm italic text-red-600">
+                        <ExclamationTriangleIcon className="inline w-4" /> Name is required
                     </p>
                 )}
 
-                <div className="my-2 cursor-pointer text-blue-800 font-medium w-fix">
+                <div className="my-2 font-medium text-blue-800 cursor-pointer w-fix">
                     Email<span className="text-red-600"> *</span>
                 </div>
                 <input
@@ -121,25 +121,25 @@ const EditAuthor = () => {
                         },
                     })}
                     type={'text'}
-                    className="border rounded bg-blue-100 border-3 border-blue-800 p-1 w-4/5 md:w-2/5 h-7"
+                    className="w-4/5 p-1 bg-blue-100 border border-blue-800 rounded border-3 md:w-2/5 h-7"
                 ></input>
-                <div className="flex mt-10 gap-3">
+                <div className="flex gap-3 mt-10">
                     <button
                         onClick={handleDelete}
-                        className="bg-red-600 text-white py-2 px-6 rounded-md text-sm relative hover:bg-red-400"
+                        className="relative px-6 py-2 text-sm text-white bg-red-600 rounded-md hover:bg-red-400"
                     >
                         Delete
                     </button>
                     <input
                         type="submit"
                         value="Save"
-                        className="bg-blue-700 text-white py-2 px-6 rounded-md text-sm relative cursor-pointer hover:bg-blue-500"
+                        className="relative px-6 py-2 text-sm text-white bg-blue-700 rounded-md cursor-pointer hover:bg-blue-500"
                     />
                 </div>
                 {formState.errors.email?.message && (
-                    <p role="alert" className="text-red-600 italic text-sm mt-1">
+                    <p role="alert" className="mt-1 text-sm italic text-red-600">
                         <>
-                            <ExclamationTriangleIcon className="w-4 inline" /> {formState.errors.email?.message}
+                            <ExclamationTriangleIcon className="inline w-4" /> {formState.errors.email?.message}
                         </>
                     </p>
                 )}

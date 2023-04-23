@@ -6,15 +6,15 @@ import { useState, useEffect } from 'react';
 import Sidebar from './component/Sidebar';
 import Dashboard from './Pages/Dashboard';
 import ContentSidebar from './component/Content/Sidebar';
-import EditArticle from './component/Content/Article';
-import EditCategory from './component/Content/Category';
-import EditAuthor from './component/Content/Author';
+import EditArticle from './component/Content/Post';
+import EditCategory from './component/Content/Subject';
+import EditAuthor from './component/Content/Teacher';
 import EditTag from './component/Content/Tag';
 import ContentManager from './component/Content/Manager';
 import Login from './component/Login';
 
 const App = () => {
-    const [auth, setAuth] = useState(false);
+    const [auth, setAuth] = useState(true);
     const navigate = useNavigate();
     const checkAuth = () => {
         setAuth(true);
@@ -43,22 +43,22 @@ const App = () => {
                     <Route path="/" element={<Sidebar checkOut={() => setAuth(false)} />}>
                         <Route index element={<Dashboard />} />
                         <Route path="content" element={<ContentSidebar />}>
-                            <Route path="article">
+                            <Route path="post">
                                 <Route index element={<ContentManager />} />
                                 <Route path="create" element={<EditArticle />} />
                                 <Route path=":id" element={<EditArticle />} />
                             </Route>
-                            <Route path="category">
+                            <Route path="subject">
                                 <Route index element={<ContentManager />} />
                                 <Route path="create" element={<EditCategory />} />
                                 <Route path=":id" element={<EditCategory />} />
                             </Route>
-                            <Route path="author">
+                            <Route path="teacher">
                                 <Route index element={<ContentManager />} />
                                 <Route path="create" element={<EditAuthor />} />
                                 <Route path=":id" element={<EditAuthor />} />
                             </Route>
-                            <Route path="tag">
+                            <Route path="class">
                                 <Route index element={<ContentManager />} />
                                 <Route path="create" element={<EditTag />} />
                                 <Route path=":id" element={<EditTag />} />
