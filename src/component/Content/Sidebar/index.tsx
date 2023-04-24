@@ -9,24 +9,28 @@ import SubSidebarContext from '../../../Common/Context';
 
 import SidebarItems from './items';
 const ContentSidebar = () => {
-    const [pages, setPages] = useState([
+    const pages = [
         {
             name: 'post',
+            label: 'Đăng bài',
             Icon: NewspaperIcon,
         },
         {
             name: 'subject',
+            label: 'Môn học',
             Icon: AcademicCapIcon,
         },
         {
             name: 'teacher',
+            label: 'Giáo viên',
             Icon: UserCircleIcon,
         },
         {
             name: 'class',
+            label: 'Lớp học',
             Icon: BuildingLibraryIcon,
         },
-    ]);
+    ];
     return (
         <>
             <SubSidebarContext.Consumer>
@@ -34,7 +38,7 @@ const ContentSidebar = () => {
                     openSub && (
                         <nav className="flex flex-col w-24 col-span-2 ml-2 mr-3 md:w-48 bg-none rounded-3xl md:bg-white">
                             <div className="hidden md:block h-12 text-center text-blue-800 font-medium pt-2.5 text-xl">
-                                Content
+                                Nội dung
                             </div>
                             <ul>
                                 <SidebarItems items={pages} />

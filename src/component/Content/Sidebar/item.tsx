@@ -9,10 +9,11 @@ interface vectorprops {
 
 interface props {
     name: string;
+    label: string;
     Icon: React.FC<vectorprops>;
 }
 
-const SidebarItem = ({ name, Icon }: props) => {
+const SidebarItem = ({ name, Icon, label }: props) => {
     const { width } = useWindowDimensions();
     const { setOpenSub } = useContext(SubSidebarContext);
     const styleContent =
@@ -30,8 +31,8 @@ const SidebarItem = ({ name, Icon }: props) => {
                         to={`/content/${name}`}
                         className={({ isActive }) => (isActive ? activeStyleContent : styleContent)}
                     >
-                        <span className="px-4 col-span-2 capitalize text-center text-blue-800 text-sm ">{name}</span>
-                        <Icon className="hidden md:block h-6 w-6 justify-self-center col-span-1 text-blue-800 text-sm	" />
+                        <span className="col-span-2 px-4 text-sm text-center text-blue-800 capitalize ">{label}</span>
+                        <Icon className="hidden w-6 h-6 col-span-1 text-sm text-blue-800 md:block justify-self-center " />
                     </NavLink>
                 </li>
             )}

@@ -10,7 +10,6 @@ interface props {
 }
 
 const Table = ({ data }: props) => {
-    console.log(data);
     const navigate = useNavigate();
     const pathName = useLocation().pathname;
 

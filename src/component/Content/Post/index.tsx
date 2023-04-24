@@ -37,7 +37,7 @@ const EditArticle = () => {
                     setTags(data.tags);
                     setEditorValue(data.content);
                 })
-                .catch((err) => toast.error('GET article error: ', err.code));
+                .catch((err) => toast.error('Lỗi tải bài đăng: ', err.code));
     }, []);
 
     const handleSave = (data: any) => {
@@ -54,9 +54,9 @@ const EditArticle = () => {
                         navigate(-1);
                     });
                 toast.promise(updatePromise, {
-                    pending: 'Updating...',
-                    success: 'Updated successfully!',
-                    error: 'Fail!! Check the console for detail',
+                    pending: 'Đang cập nhật...',
+                    success: 'Cập nhật thành công',
+                    error: 'Có lỗi xảy ra',
                 });
             } else {
                 var createPromise = instance
@@ -71,9 +71,9 @@ const EditArticle = () => {
                         navigate(-1);
                     });
                 toast.promise(createPromise, {
-                    pending: 'Creating...',
-                    success: 'Created successfully!',
-                    error: 'Fail!! Check the console for detail',
+                    pending: 'Đang tạo...',
+                    success: 'Tạo mới thành công!',
+                    error: 'Có lỗi xảy ra',
                 });
             }
     };
@@ -84,12 +84,12 @@ const EditArticle = () => {
                 navigate(-1);
             });
             toast.promise(deletePromise, {
-                pending: 'Deleting...',
-                success: 'Deleted successfully!',
-                error: 'Fail!! Check the console for detail',
+                pending: 'Đang xóa...',
+                success: 'Xóa thành công!',
+                error: 'Có lỗi xảy ra',
             });
         } else {
-            toast.success('Delete successfully!');
+            toast.success('Xóa thành công!');
             navigate(-1);
         }
     };
@@ -106,7 +106,7 @@ const EditArticle = () => {
                 </div>
                 <div className="pt-4 pb-8">
                     <div className="flex justify-between">
-                        <h1 className="text-3xl font-medium text-blue-800">{title || 'Create an entry'}</h1>
+                        <h1 className="text-3xl font-medium text-blue-800">{title || 'Tạo mục mới'}</h1>
                         <div className="flex gap-3">
                             <div className="flex items-center font-medium text-blue-800">Đăng tải</div>
                             <Switch
@@ -120,23 +120,23 @@ const EditArticle = () => {
                                 className="relative px-6 py-2 text-sm text-white bg-red-600 rounded-md hover:bg-red-400"
                                 type="button"
                             >
-                                Delete
+                                Xóa
                             </button>
                             <input
                                 type="submit"
-                                value="Save"
+                                value="Lưu"
                                 className="relative px-6 py-2 text-sm text-white bg-blue-700 rounded-md cursor-pointer hover:bg-blue-500"
                             />
                         </div>
                     </div>
-                    <div className="font-medium text-blue-600">Article</div>
+                    <div className="font-medium text-blue-600">Đăng bài</div>
                 </div>
 
                 <div className="grid grid-cols-1">
                     <div className="grid grid-rows-2">
                         <div>
                             <div className="my-2 font-medium text-blue-800 cursor-pointer w-fix">
-                                Title<span className="text-red-600"> *</span>
+                                Bài viết<span className="text-red-600"> *</span>
                             </div>
                             <input
                                 {...register('title', { required: true })}
@@ -145,7 +145,7 @@ const EditArticle = () => {
                             ></input>
                             {errors.title?.type === 'required' && (
                                 <p role="alert" className="mt-1 text-sm italic text-red-600">
-                                    <ExclamationTriangleIcon className="inline w-4" /> Title is required
+                                    <ExclamationTriangleIcon className="inline w-4" /> Vui lòng nhập tiêu đề
                                 </p>
                             )}
                         </div>
@@ -167,8 +167,8 @@ const EditArticle = () => {
                     </div>
                 </div>
 
-                <div className="py-10">
-                    <div className="mb-2 font-medium text-blue-800 cursor-pointer hover:underline w-fix">Content</div>
+                <div className="py-7">
+                    <div className="mb-2 font-medium text-blue-800 cursor-pointer w-fix">Nội dung</div>
                     <div className="border border-blue-800 rounded-md">
                         <Editor setEditorValue={setEditorValue} editorValue={editorValue} />
                     </div>

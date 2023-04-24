@@ -28,13 +28,12 @@ const EditAuthor = () => {
             instance
                 .get(`/teacher/${id}`)
                 .then((res) => {
-                    console.log(res.data);
                     setTitle(res.data.name);
                     setValue('name', res.data.name);
                     setValue('description', res.data.description);
                     setSubjectsValue(res.data.subjects);
                 })
-                .catch((err) => toast.error('GET author error: ', err.code));
+                .catch((err) => toast.error('Lỗi tải giáo viên: ', err.code));
         instance.get('/subject').then(({ data }) => {
             setSubjectsOptions(data);
         });
@@ -54,9 +53,9 @@ const EditAuthor = () => {
                         navigate(-1);
                     });
                 toast.promise(updatePromise, {
-                    pending: 'Updating...',
-                    success: 'Updated successfully!',
-                    error: 'Fail!! Check the console for detail',
+                    pending: 'Đang cập nhật...',
+                    success: 'Cập nhật thành công',
+                    error: 'Có lỗi xảy ra',
                 });
             } else {
                 var createPromise = instance
@@ -70,9 +69,9 @@ const EditAuthor = () => {
                         navigate(-1);
                     });
                 toast.promise(createPromise, {
-                    pending: 'Creating...',
-                    success: 'Created successfully!',
-                    error: 'Fail!! Check the console for detail',
+                    pending: 'Đang tạo...',
+                    success: 'Tạo mới thành công!',
+                    error: 'Có lỗi xảy ra',
                 });
             }
     };
@@ -84,12 +83,12 @@ const EditAuthor = () => {
                 navigate(-1);
             });
             toast.promise(deletePromise, {
-                pending: 'Deleting...',
-                success: 'Deleted successfully!',
-                error: 'Fail!! Check the console for detail',
+                pending: 'Đang xóa...',
+                success: 'Xóa thành công!',
+                error: 'Có lỗi xảy ra',
             });
         } else {
-            toast.success('Delete successfully!');
+            toast.success('Xóa thành công!');
             navigate(-1);
         }
     };
@@ -105,23 +104,23 @@ const EditAuthor = () => {
                 </div>
                 <div className="pt-4 pb-8">
                     <div className="flex justify-between">
-                        <h1 className="text-3xl font-medium text-blue-800">{title || 'Create an entry'}</h1>
+                        <h1 className="text-3xl font-medium text-blue-800">{title || 'Tạo mục mới'}</h1>
                         <div className="flex gap-3">
                             <button
                                 onClick={handleDelete}
                                 type="button"
                                 className="relative px-6 py-2 text-sm text-white bg-red-600 rounded-md hover:bg-red-400"
                             >
-                                Delete
+                                Xóa
                             </button>
                             <input
                                 type="submit"
-                                value="Save"
+                                value="Lưu"
                                 className="relative px-6 py-2 text-sm text-white bg-blue-700 rounded-md cursor-pointer hover:bg-blue-500"
                             />
                         </div>
                     </div>
-                    <div className="font-medium text-blue-600">Author</div>
+                    <div className="font-medium text-blue-600">Giáo viên</div>
                 </div>
                 <div className="my-2 font-medium text-blue-800 cursor-pointer w-fix">
                     Tên giáo viên<span className="text-red-600"> *</span>

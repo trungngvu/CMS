@@ -12,13 +12,17 @@ const ContentManager = () => {
     //get last path of the URL
     const location = useLocation();
     const api = location.pathname.slice(location.pathname.lastIndexOf('/') + 1, location.pathname.length);
+    let label = '';
+    if (api === 'post') label = 'Đăng bài';
+    if (api === 'class') label = 'Lớp học';
+    if (api === 'teacher') label = 'Giáo viên';
+    if (api === 'subject') label = 'Môn học';
 
     useEffect(() => {
         instance
             .get(`/${api}`)
             .then(({ data }) => {
                 let displayData = [];
-                console.log(data);
                 if (api === 'subject')
                     displayData = data.map((item: any) => {
                         delete item.classes;
@@ -57,7 +61,6 @@ const ContentManager = () => {
                             'ngày cập nhật': new Date(item.updatedAt).toLocaleDateString(),
                         };
                     });
-                console.log(displayData);
                 setTableData(displayData);
             })
             .catch((err) => toast.error(err.code));
@@ -73,20 +76,19 @@ const ContentManager = () => {
                 >
                     &crarr; Quay lại
                 </div>
-                <div className="flex flex-col justify-between md:flex-row ">
-                    <div className="text-lg font-bold text-blue-800 capitalize">{api}</div>
+                <div className="flex flex-col justify-between md:flex-row">
+                    <div className="flex items-center text-lg font-bold text-blue-800 capitalize">{label}</div>
                     <Link
                         to={`/content/${api}/create`}
                         className="bg-blue-800 flex my-2 md:my-none justify-center items-center text-white max-w-[170px] md:max-w-none pl-4 pr-4 py-1 md:py-2  rounded-md text-sm relative hover:scale-110"
                     >
                         <span className="flex items-center justify-center pr-4 text-xl font-bold ">+</span>
-                        <p>Create new entry</p>
+                        <p>Tạo mục mới</p>
                     </Link>
                 </div>
 
-                <div className="">{tableData.length || 0} entries found</div>
+                <div className="">{tableData.length || 0} mục được tìm thấy</div>
             </div>
-            <div className="w-32 py-4">Search Filter </div>
             {tableData.length !== 0 && <Table data={tableData} />}
         </div>
     );

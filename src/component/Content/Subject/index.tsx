@@ -63,9 +63,9 @@ const EditCategory = () => {
                         navigate(-1);
                     });
                 toast.promise(updatePromise, {
-                    pending: 'Updating...',
-                    success: 'Updated successfully!',
-                    error: 'Fail!! Check the console for detail',
+                    pending: 'Đang cập nhật...',
+                    success: 'Cập nhật thành công',
+                    error: 'Có lỗi xảy ra',
                 });
             } else {
                 var createPromise = instance
@@ -82,9 +82,9 @@ const EditCategory = () => {
                         navigate(-1);
                     });
                 toast.promise(createPromise, {
-                    pending: 'Creating...',
-                    success: 'Created successfully!',
-                    error: 'Fail!! Check the console for detail',
+                    pending: 'Đang tạo...',
+                    success: 'Tạo mới thành công!',
+                    error: 'Có lỗi xảy ra',
                 });
             }
     };
@@ -99,12 +99,12 @@ const EditCategory = () => {
                 })
                 .catch((err) => toast.error(err.code));
             toast.promise(deletePromise, {
-                pending: 'Deleting...',
-                success: 'Deleted successfully!',
-                error: 'Fail!! Check the console for detail',
+                pending: 'Đang xóa...',
+                success: 'Xóa thành công!',
+                error: 'Có lỗi xảy ra',
             });
         } else {
-            toast.success('Deleted successfully!');
+            toast.success('Xóa thành công!');
             navigate(-1);
         }
     };
@@ -120,23 +120,23 @@ const EditCategory = () => {
                 </div>
                 <div className="pt-4 pb-8">
                     <div className="flex justify-between">
-                        <h1 className="text-3xl font-medium text-blue-800">{title || 'Create an entry'}</h1>
+                        <h1 className="text-3xl font-medium text-blue-800">{title || 'Tạo mục mới'}</h1>
                         <div className="flex gap-3">
                             <button
                                 onClick={handleDelete}
                                 className="relative px-6 py-2 text-sm text-white bg-red-600 rounded-md hover:bg-red-400"
                                 type="button"
                             >
-                                Delete
+                                Xóa
                             </button>
                             <input
                                 type="submit"
-                                value="Save"
+                                value="Lưu"
                                 className="relative px-6 py-2 text-sm text-white bg-blue-700 rounded-md cursor-pointer hover:bg-blue-500"
                             />
                         </div>
                     </div>
-                    <div className="font-medium text-blue-600">Category</div>
+                    <div className="font-medium text-blue-600">Môn học</div>
                 </div>
                 <div className="my-2 font-medium text-blue-800 cursor-pointer w-fix">
                     Tên môn học<span className="text-red-600"> *</span>

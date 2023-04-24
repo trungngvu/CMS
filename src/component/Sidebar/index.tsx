@@ -30,7 +30,7 @@ export default function Sidebar({ checkOut }: props) {
                         }`}
                     >
                         <ul>
-                            <Item hidden={!openMini} name="content" Vector={PencilSquareIcon} />
+                            <Item hidden={!openMini} name="content" label='Nội dung' Vector={PencilSquareIcon} />
                         </ul>
                     </nav>
 
