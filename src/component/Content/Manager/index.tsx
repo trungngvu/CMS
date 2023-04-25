@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import Table from './table';
 import instance from '../../../Common/axios';
 
-const ContentManager = () => {
+const ContentManager = ({ viewOnly }: { viewOnly: boolean }) => {
     const [tableData, setTableData] = useState([]);
     const navigate = useNavigate();
 
@@ -17,6 +17,8 @@ const ContentManager = () => {
     if (api === 'class') label = 'Lớp học';
     if (api === 'teacher') label = 'Giáo viên';
     if (api === 'subject') label = 'Môn học';
+    if (api === 'contact') label = 'Form liên lạc';
+    if (api === 'registration') label = 'Form đăng ký học';
 
     useEffect(() => {
         instance
@@ -52,13 +54,27 @@ const ContentManager = () => {
                         delete item.authorId;
                         delete item.tags;
                         delete item.author;
+                        delete item.content;
                         return {
                             id: item.id,
                             'tiêu đề': item.title,
-                            'nội dung': item.content,
                             'đăng tải': item.published ? 'Đã đăng' : 'Chưa đăng',
                             'ngày viết': new Date(item.createdAt).toLocaleDateString(),
                             'ngày cập nhật': new Date(item.updatedAt).toLocaleDateString(),
+                        };
+                    });
+                if (api === 'contact') displayData = data;
+                if (api === 'registration')
+                    displayData = data.map((item: any) => {
+                        console.log(item);
+                        return {
+                            id: item.id,
+                            Tên: item.name,
+                            'Email/SĐT': item.contact,
+                            'Lớp học muốn đăng ký': item.classes
+                                ?.map((i: any) => i.title)
+                                .join(', ')
+                                .split(),
                         };
                     });
                 setTableData(displayData);
@@ -78,18 +94,20 @@ const ContentManager = () => {
                 </div>
                 <div className="flex flex-col justify-between md:flex-row">
                     <div className="flex items-center text-lg font-bold text-blue-800 capitalize">{label}</div>
-                    <Link
-                        to={`/content/${api}/create`}
-                        className="bg-blue-800 flex my-2 md:my-none justify-center items-center text-white max-w-[170px] md:max-w-none pl-4 pr-4 py-1 md:py-2  rounded-md text-sm relative hover:scale-110"
-                    >
-                        <span className="flex items-center justify-center pr-4 text-xl font-bold ">+</span>
-                        <p>Tạo mục mới</p>
-                    </Link>
+                    {!viewOnly && (
+                        <Link
+                            to={`$/content/${api}/create`}
+                            className="bg-blue-800 flex my-2 md:my-none justify-center items-center text-white max-w-[170px] md:max-w-none pl-4 pr-4 py-1 md:py-2  rounded-md text-sm relative hover:scale-110"
+                        >
+                            <span className="flex items-center justify-center pr-4 text-xl font-bold ">+</span>
+                            <p>Tạo mục mới</p>
+                        </Link>
+                    )}
                 </div>
 
                 <div className="">{tableData.length || 0} mục được tìm thấy</div>
             </div>
-            {tableData.length !== 0 && <Table data={tableData} />}
+            {tableData.length !== 0 && <Table viewonly={viewOnly} data={tableData} />}
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 
 interface props {
+    viewonly: boolean;
     data: {
         id: number;
         createdAt?: string;
@@ -9,12 +10,12 @@ interface props {
     }[];
 }
 
-const Table = ({ data }: props) => {
+const Table = ({ data, viewonly }: props) => {
     const navigate = useNavigate();
     const pathName = useLocation().pathname;
 
     const handleClick = (id: number) => {
-        navigate(`${pathName}/${id}`);
+        !viewonly && navigate(`${pathName}/${id}`);
     };
 
     return (

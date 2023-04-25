@@ -11,7 +11,7 @@ const Login = ({ checkAuth }: props) => {
     const [pw, setPw] = useState('');
     const [notf, setNotf] = useState(false);
     const check = () => {
-        if (email === 'admin' && pw === 'admin') checkAuth();
+        if (email === 'sunroadhn@gmail.com' && pw === 'admin') checkAuth();
         else setNotf(true);
     };
     return (
@@ -21,11 +21,11 @@ const Login = ({ checkAuth }: props) => {
                 <div className="flex justify-center py-4 mt-6">
                     <img className="w-32" src={ReactLogo} alt="React Logo" />
                 </div>
-                <div className="text-center py-4 text-3xl font-semibold">Welcome</div>
+                <div className="text-center py-4 text-3xl font-semibold">Xin chào</div>
                 <p className="text-center text-gray-500 px-12 text-sm">
-                    Aliquam consectetur et tincidunt praesent enim massa pellentesque velit odio neque
+                    Chào mừng đến với trang quản trị nội dung sunroad.vn
                 </p>
-                {notf && <p className=" mt-8 text-center font-bold text-sm text-red-500">Wrong Credentials!</p>}
+                {notf && <p className=" mt-8 text-center font-bold text-sm text-red-500">Sai tên đăng nhập hoặc mật khẩu</p>}
                 <form className="px-16 mt-8">
                     <div className="relative ">
                         <input
@@ -51,7 +51,7 @@ const Login = ({ checkAuth }: props) => {
                         onClick={check}
                         className="w-2/3 text-white px-16 py-3 font-semibold bg-blue-700 mt-8 rounded-lg hover:bg-opacity-90"
                     >
-                        Login
+                        Đăng nhập
                     </button>
                 </div>
             </div>

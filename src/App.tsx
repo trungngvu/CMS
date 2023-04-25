@@ -14,7 +14,7 @@ import ContentManager from './component/Content/Manager';
 import Login from './component/Login';
 
 const App = () => {
-    const [auth, setAuth] = useState(true);
+    const [auth, setAuth] = useState(false);
     const navigate = useNavigate();
     const checkAuth = () => {
         setAuth(true);
@@ -44,24 +44,30 @@ const App = () => {
                         <Route index element={<Dashboard />} />
                         <Route path="content" element={<ContentSidebar />}>
                             <Route path="post">
-                                <Route index element={<ContentManager />} />
+                                <Route index element={<ContentManager viewOnly={false} />} />
                                 <Route path="create" element={<EditArticle />} />
                                 <Route path=":id" element={<EditArticle />} />
                             </Route>
                             <Route path="subject">
-                                <Route index element={<ContentManager />} />
+                                <Route index element={<ContentManager viewOnly={false} />} />
                                 <Route path="create" element={<EditCategory />} />
                                 <Route path=":id" element={<EditCategory />} />
                             </Route>
                             <Route path="teacher">
-                                <Route index element={<ContentManager />} />
+                                <Route index element={<ContentManager viewOnly={false} />} />
                                 <Route path="create" element={<EditAuthor />} />
                                 <Route path=":id" element={<EditAuthor />} />
                             </Route>
                             <Route path="class">
-                                <Route index element={<ContentManager />} />
+                                <Route index element={<ContentManager viewOnly={false} />} />
                                 <Route path="create" element={<EditTag />} />
                                 <Route path=":id" element={<EditTag />} />
+                            </Route>
+                            <Route path="contact">
+                                <Route index element={<ContentManager viewOnly={true} />} />
+                            </Route>
+                            <Route path="registration">
+                                <Route index element={<ContentManager viewOnly={true} />} />
                             </Route>
                         </Route>
                     </Route>

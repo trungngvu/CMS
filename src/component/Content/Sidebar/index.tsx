@@ -1,10 +1,11 @@
-import { useState, useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { BuildingLibraryIcon } from '@heroicons/react/24/solid';
 import { NewspaperIcon } from '@heroicons/react/24/solid';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
 import { AcademicCapIcon } from '@heroicons/react/24/solid';
+import { PhoneIcon } from '@heroicons/react/24/solid';
+import { PencilSquareIcon } from '@heroicons/react/24/solid';
 import SubSidebarContext from '../../../Common/Context';
 
 import SidebarItems from './items';
@@ -29,6 +30,16 @@ const ContentSidebar = () => {
             name: 'class',
             label: 'Lớp học',
             Icon: BuildingLibraryIcon,
+        },
+        {
+            name: 'contact',
+            label: 'Liên lạc',
+            Icon: PhoneIcon,
+        },
+        {
+            name: 'registration',
+            label: 'ĐK học',
+            Icon: PencilSquareIcon,
         },
     ];
     return (
