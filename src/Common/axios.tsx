@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'https://sunroad.vn/api/',
+    baseURL: 'https://www.sunroad.vn/api/',
 });
 
 export default instance;
