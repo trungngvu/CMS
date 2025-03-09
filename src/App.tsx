@@ -14,15 +14,15 @@ import ContentManager from './component/Content/Manager';
 import Login from './component/Login';
 
 const App = () => {
-    const [auth, setAuth] = useState(false);
+    const [auth, setAuth] = useState(true);
     const navigate = useNavigate();
     const checkAuth = () => {
         setAuth(true);
         navigate('/');
     };
-    useEffect(() => {
-        if (auth === false) navigate('/login');
-    }, [auth]);
+    // useEffect(() => {
+    //     if (auth === false) navigate('/login');
+    // }, [auth]);
     return (
         <>
             <ToastContainer

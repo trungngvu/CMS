@@ -96,7 +96,7 @@ const ContentManager = ({ viewOnly }: { viewOnly: boolean }) => {
                     <div className="flex items-center text-lg font-bold text-blue-800 capitalize">{label}</div>
                     {!viewOnly && (
                         <Link
-                            to={`$/content/${api}/create`}
+                            to={`create`}
                             className="bg-blue-800 flex my-2 md:my-none justify-center items-center text-white max-w-[170px] md:max-w-none pl-4 pr-4 py-1 md:py-2  rounded-md text-sm relative hover:scale-110"
                         >
                             <span className="flex items-center justify-center pr-4 text-xl font-bold ">+</span>

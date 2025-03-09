@@ -11,8 +11,7 @@ const Login = ({ checkAuth }: props) => {
     const [pw, setPw] = useState('');
     const [notf, setNotf] = useState(false);
     const check = () => {
-        if (email === 'sunroadhn@gmail.com' && pw === 'admin') checkAuth();
-        else setNotf(true);
+         checkAuth();
     };
     return (
         <div className=" bg-gray-100 flex justify-center items-center h-screen min-h-[650px]">
