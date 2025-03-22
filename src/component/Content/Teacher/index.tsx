@@ -14,13 +14,15 @@ const EditAuthor = () => {
         setValue,
         formState: { errors },
         formState,
+        watch,
     } = useForm();
     const [title, setTitle] = useState('');
     const [subjectsOptions, setSubjectsOptions] = useState<{ title: string; id: number }[]>([]);
     const [subjectsValue, setSubjectsValue] = useState<{ title: string; id: number }[]>([]);
     const [propagation, stopPropagation] = useState(false);
     const navigate = useNavigate();
-
+    const base64Image = watch('image');
+    const [image, setImage] = useState('');
     const id = useParams().id || '';
 
     useEffect(() => {
@@ -31,6 +33,7 @@ const EditAuthor = () => {
                     setTitle(res.data.name);
                     setValue('name', res.data.name);
                     setValue('description', res.data.description);
+                    setValue('image', res.data.image);
                     setSubjectsValue(res.data.subjects);
                 })
                 .catch((err) => toast.error('Lỗi tải giáo viên: ', err.code));
@@ -39,7 +42,40 @@ const EditAuthor = () => {
         });
     }, []);
 
-    const handleSave = (data: any) => {
+    const imgConverter = (img: FileList): Promise<string | null> => {
+        return new Promise((resolve, reject) => {
+            if (img && img[0]) {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result as string);
+                reader.onerror = (error) => reject(error);
+                reader.readAsDataURL(img[0]); // Convert the first file to Base64
+            } else {
+                resolve(null); // Return null if no file is provided
+            }
+        });
+    };
+
+    // if base64Image is a file, convert it to base64 string
+    useEffect(() => {
+        if (base64Image && base64Image.length > 0 && base64Image[0] instanceof File) {
+            imgConverter(base64Image).then((base64 : any) => {
+                setImage(base64);
+            });
+        } else {
+            setImage(base64Image);
+        }
+    }, [base64Image]);
+
+    const handleSave = async (data: any) => {
+        console.log(data);
+        if (data.image && data.image.length > 0) {
+            try {
+                const base64Image = await imgConverter(data.image);
+                data.image = base64Image;
+            } catch (error) {
+                console.error('Error converting file to base64:', error);
+            }
+        }
         if (propagation === false)
             if (id !== '') {
                 var updatePromise = instance
@@ -161,6 +197,8 @@ const EditAuthor = () => {
                         isOptionEqualToValue={(option, value) => option.title === value.title}
                     />
                 </div>
+                <input type="file" accept="image/*" {...register('image')} />
+                {base64Image && <img src={image} alt="Uploaded" />}
             </div>
         </form>
     );

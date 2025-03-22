@@ -35,6 +35,7 @@ const ContentManager = ({ viewOnly }: { viewOnly: boolean }) => {
                 if (api === 'teacher')
                     displayData = data.map((item: any) => {
                         delete item.subjects;
+                        delete item.image;
                         return {
                             ...item,
                         };

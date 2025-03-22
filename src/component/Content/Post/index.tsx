@@ -150,7 +150,7 @@ const EditArticle = () => {
                             )}
                         </div>
                     </div>
-                    <div className="grid grid-rows-2">
+                    {/* <div className="grid grid-rows-2">
                         <Autocomplete
                             onChange={(event: any, newValue: any) => {
                                 setTags(newValue);
@@ -164,7 +164,7 @@ const EditArticle = () => {
                                 <TextField {...params} label="Tag (bấm enter để thêm nhiều tag)" />
                             )}
                         />
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="py-7">

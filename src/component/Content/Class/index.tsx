@@ -146,12 +146,20 @@ const EditTag = () => {
                     className="w-4/5 p-1 bg-blue-100 border border-blue-800 rounded border-3 md:w-2/5 h-7"
                     type={'text'}
                 ></input>
-                <div className="my-2 font-medium text-blue-800 cursor-pointer w-fix">Số lượng học sinh</div>
+                <div className="my-2 font-medium text-blue-800 cursor-pointer w-fix">
+                    Số lượng học sinh
+                    <span className="text-red-600"> *</span>
+                </div>
                 <input
                     {...register('students')}
                     className="w-4/5 p-1 bg-blue-100 border border-blue-800 rounded border-3 md:w-2/5 h-7"
                     type={'number'}
                 ></input>
+                {errors.students?.type === 'required' && (
+                    <p role="alert" className="mt-1 text-sm italic text-red-600">
+                        <ExclamationTriangleIcon className="inline w-4" /> Vui lòng nhập số lượng học sinh
+                    </p>
+                )}
                 <div className="my-2 font-medium text-blue-800 cursor-pointer w-fix">
                     Ngày bắt đầu<span className="text-red-600"> *</span>
                 </div>
